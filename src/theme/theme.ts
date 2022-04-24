@@ -8,12 +8,16 @@ export const theme = {
     backgroundActiveElem: '#FC5842',
     textPrimary: '#FFFFFF',
     textSecondary: '#C7C7C7',
+    neutral: '#393939',
+    hoverButton: '#DC2B2B',
+    error: '#FF5A65',
   },
   fonts: {
     secondary: 'Inter',
     number: 'DM Sans',
   },
   sizes: {
+    extraSmall: '0.8',
     small: '1',
     medium: '1.5',
     title: '2.4',

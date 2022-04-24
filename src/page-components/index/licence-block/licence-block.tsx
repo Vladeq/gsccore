@@ -4,7 +4,8 @@ interface LicenceBlockProps {
   price: string;
   sites: string;
 }
-import Checked from '../../../components/ui/icons/ui-icon-checked/checked.svg';
+import { Checked } from '../../../assets/svg-react/index';
+
 function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
   return (
     <Heading>
@@ -31,7 +32,7 @@ function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
         </Li>
       </LiBlock>
       <LinkBlock>
-        <Link href="" passHref>
+        <Link href="/sign-up" passHref>
           <LinkText>Get Gscore</LinkText>
         </Link>
       </LinkBlock>
@@ -39,27 +40,6 @@ function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
   );
 }
 
-const Heading = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: ${({ theme }) => theme.colors.backgroundBlock};
-  color: ${({ theme }) => theme.colors.textPrimary};
-  box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
-  border-radius: 12px;
-  margin: 6rem 0.5rem 0 0.5rem;
-  transition: margin 0.5s, color 2s;
-  &:hover {
-    background: ${({ theme }) => theme.colors.backgroundActiveElem};
-    margin: 0 0.5rem 0 0.5rem;
-    p {
-      color: ${({ theme }) => theme.colors.textPrimary};
-    }
-    a {
-      color: ${({ theme }) => theme.colors.backgroundActiveElem};
-    }
-  }
-`;
 const BlockInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -135,5 +115,26 @@ const LinkText = styled.a`
     text-align: center;
     padding: 1rem 6rem 1rem 6rem;
   `}
+`;
+const Heading = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: ${({ theme }) => theme.colors.backgroundBlock};
+  color: ${({ theme }) => theme.colors.textPrimary};
+  box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  margin: 6rem 0.5rem 0 0.5rem;
+  transition: margin 0.5s, color 2s;
+  &:hover {
+    background: ${({ theme }) => theme.colors.backgroundActiveElem};
+    margin: 0 0.5rem 0 0.5rem;
+    ${InfoText} {
+      color: ${({ theme }) => theme.colors.textPrimary};
+    }
+    ${LinkText} {
+      color: ${({ theme }) => theme.colors.backgroundActiveElem};
+    }
+  }
 `;
 export default LicenceBlock;

@@ -9,12 +9,12 @@ function HeadingH2({ text }: HeadingProps): JSX.Element {
 
 const Title = styled.h2`
   ${({ theme }) => css`
+    display: block;
     color: ${theme.colors.textPrimary};
     font-size: ${theme.sizes.title}rem;
     font-weight: 700;
     line-height: 3rem;
     margin: 0.5rem;
-    text-align: center;
   `}
 `;
 

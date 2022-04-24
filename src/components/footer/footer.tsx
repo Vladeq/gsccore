@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { Logo } from '../logo';
-import { UIIconFb } from '../ui/icons/ui-icon-fb/index';
-import { UIIconIn } from '../ui/icons/ui-icon-in/index';
-import { UIIconTwitter } from '../ui/icons/ui-icon-twitter/index';
+import { Facebook, Linkedin, Logo, Twitter } from '../../assets/svg-react/index';
 
 function Footer(): JSX.Element {
   return (
@@ -26,9 +23,9 @@ function Footer(): JSX.Element {
           </ABlock>
         </Copyright>
         <SocialBlock>
-          <UIIconFb />
-          <UIIconTwitter />
-          <UIIconIn />
+          <Facebook />
+          <Twitter />
+          <Linkedin />
         </SocialBlock>
       </CopyrightBlock>
     </Heading>
@@ -111,7 +108,9 @@ const A = styled.a`
 const SocialBlock = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+  width: 9rem;
   background: ${({ theme }) => theme.colors.backgroundMain};
 `;
 export default Footer;

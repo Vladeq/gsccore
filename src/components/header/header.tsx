@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-import { Logo } from '../logo/index';
+import { Logo } from '../../assets/svg-react/index';
 
 interface HeaderProps {
-  headerLeft?: JSX.Element;
+  headerRight?: JSX.Element;
 }
-function Header({ headerLeft }: HeaderProps): JSX.Element {
+function Header({ headerRight }: HeaderProps): JSX.Element {
   return (
     <Heading>
       <Logo />
-      {headerLeft}
+      {headerRight}
     </Heading>
   );
 }

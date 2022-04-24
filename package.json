@@ -7,13 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "svg:transform": "./node_modules/@svgr/cli/bin/svgr --ignore-existing --typescript -d src/assets/svg-react src/assets/svg"
+    "svg:transform": "node ./node_modules/@svgr/cli/bin/svgr --ignore-existing --typescript -d src/assets/svg-react src/assets/svg"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
     "@svgr/cli": "^6.2.1",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "react-hook-form": "^7.30.0",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
