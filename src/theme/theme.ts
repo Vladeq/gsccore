@@ -10,6 +10,8 @@ export const theme = {
     textSecondary: '#C7C7C7',
     neutral: '#393939',
     hoverButton: '#DC2B2B',
+    valid: '#05C168',
+    filled: '#969696',
     error: '#FF5A65',
   },
   fonts: {

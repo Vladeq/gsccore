@@ -1,36 +1,24 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import styled, { css } from 'styled-components';
+import { useContext, useEffect } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import styled, { css, ThemeContext } from 'styled-components';
 
+import { FormInput } from '../components/form-components/form-input';
 import { HeadingH2 } from '../components/heading-h2';
-import { InputController } from '../components/input-controller';
 import { UIButton } from '../components/ui/ui-button';
-import { Errors } from '../input-errors/errors';
-import { required, validateEmail } from '../input-errors/validators';
 import { MainLayout } from '../layouts/main-layout';
 import { StagePointer } from '../page-components/sign/stage-pointer';
-import { theme } from '../theme/theme';
 import { SignUpDto } from '../types/api-types';
 
 export default function SignUp(): JSX.Element {
-  const { control, handleSubmit, getValues, setError, formState } = useForm<SignUpDto>({
+  const { control, handleSubmit, formState } = useForm<SignUpDto>({
     defaultValues: { email: '', password: '' },
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    Object.keys(getValues()).forEach((value) => {
-      setError(Errors[value].name, {
-        type: Errors[value].type,
-        message: Errors[value].message,
-      });
-    });
-  }, [setError]);
-
   const onSubmit: SubmitHandler<SignUpDto> = (data) => console.log(data);
+  const theme = useContext(ThemeContext);
 
-  console.log(formState.isValid);
   return (
     <MainLayout>
       <Heading>
@@ -43,25 +31,34 @@ export default function SignUp(): JSX.Element {
           <HeadingH2 text="Log in" />
         </TitleBlock>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <InputController
+          <Controller
             control={control}
-            placeholder="Enter email"
-            name="email"
-            rules={{ validate: validateEmail }}
+            name={'email'}
+            rules={{
+              pattern: {
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: 'Must be email',
+              },
+            }}
+            render={({ field, fieldState }) => (
+              <FormInput {...field} {...fieldState} placeholder={'Enter email'} />
+            )}
           />
-          <InputController
+          <Controller
             control={control}
-            placeholder="Enter password"
             name="password"
-            rules={{ validate: required }}
+            rules={{ required: 'Password required' }}
+            render={({ field, fieldState }) => (
+              <FormInput {...field} {...fieldState} placeholder={'Enter password'} />
+            )}
           />
           <StyledButton
             color={theme.colors.backgroundActiveElem}
             type="submit"
             disabled={!formState.isValid}
-          >
-            Log in
-          </StyledButton>
+            value={'Log in'}
+          />
         </Form>
       </Heading>
     </MainLayout>

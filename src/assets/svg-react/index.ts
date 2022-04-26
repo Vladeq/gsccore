@@ -1,7 +1,7 @@
-export { default as Check } from './Check';
-export { default as Checked } from './Checked';
-export { default as Close } from './Close';
-export { default as Facebook } from './Facebook';
-export { default as Linkedin } from './Linkedin';
-export { default as Logo } from './Logo';
-export { default as Twitter } from './Twitter';
+export { default as Check } from './check';
+export { default as Checked } from './checked';
+export { default as Close } from './close';
+export { default as Facebook } from './facebook';
+export { default as Linkedin } from './linkedin';
+export { default as Logo } from './logo';
+export { default as Twitter } from './twitter';
