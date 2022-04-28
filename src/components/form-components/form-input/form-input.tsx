@@ -1,45 +1,31 @@
 import { useState } from 'react';
-import { ControllerFieldState } from 'react-hook-form';
+import { UseControllerReturn } from 'react-hook-form';
 import styled, { css } from 'styled-components';
 
 import { Check, Close } from '../../../assets/svg-react';
 import { UIInput } from '../../ui/ui-input/index';
 
-interface FormInputProps extends ControllerFieldState {
-  onChange: (value: any) => void;
-  onBlur: () => void;
-  value: string;
-  name: string;
-  ref?: any;
+interface FormInputProps extends UseControllerReturn {
   placeholder: string;
 }
 
-function FormInput({
-  onChange,
-  onBlur,
-  value,
-  name,
-  placeholder,
-  isTouched,
-  isDirty,
-  error,
-}: FormInputProps): JSX.Element {
+function FormInput({ placeholder, ...fieldRender }: FormInputProps): JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
-  const hasError = error;
+  const hasError = fieldRender.fieldState.error;
+  const isDirty = fieldRender.fieldState.isDirty;
   return (
     <Heading>
       <Wrapper $hasError={hasError} $isFocused={isFocused} $isDirty={isDirty}>
         <UIInput
-          onChange={onChange}
+          {...fieldRender.field}
+          {...fieldRender.fieldState}
           placeholder={placeholder}
-          value={value}
-          name={name}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
         />
         {isFocused && isDirty ? hasError ? <Close /> : <Check /> : null}
       </Wrapper>
-      {hasError ? <ErrorText>{error.message}</ErrorText> : <ErrorText> </ErrorText>}
+      {hasError ? <ErrorText>{hasError.message}</ErrorText> : <ErrorText> </ErrorText>}
     </Heading>
   );
 }
@@ -59,21 +45,14 @@ const Wrapper = styled.div<{
   background: white;
   padding: 1rem 0.5rem 1rem 0.5rem;
   border-radius: 6px;
-  ${({ $hasError, $isDirty, theme }) => {
-    if ($hasError) {
-      return css`
-        border: 2px solid ${theme.colors.error};
-      `;
-    } else if ($isDirty) {
-      return css`
-        border: 2px solid ${theme.colors.valid};
-      `;
-    } else {
-      return css`
-        border: 2px solid ${theme.colors.filed};
-      `;
-    }
-  }}
+  ${({ theme, $hasError, $isDirty }) => css`
+    border: 2px solid
+      ${$hasError
+        ? theme.colors.error
+        : $isDirty
+        ? theme.colors.valid
+        : theme.colors.filled};
+  `}
 `;
 const ErrorText = styled.span`
   ${({ theme }) => css`

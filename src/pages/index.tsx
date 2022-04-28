@@ -1,10 +1,22 @@
-import styled, { css } from 'styled-components';
+import { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ClipLoader from 'react-spinners/ClipLoader';
+import styled, { css, ThemeContext } from 'styled-components';
 
+import { ErrorComp } from '../components/error-comp';
 import { HeadingH2 } from '../components/heading-h2';
 import { MainLayout } from '../layouts/main-layout';
 import { LicenceBlock } from '../page-components/index/licence-block';
+import { RootState } from '../store';
+import { getProductsAct } from '../store/ducks/products/products-actions';
 
 export default function Home(): JSX.Element {
+  const theme = useContext(ThemeContext);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductsAct());
+  }, []);
+  const state = useSelector((state: RootState) => state.products);
   return (
     <MainLayout>
       <Heading>
@@ -12,9 +24,26 @@ export default function Home(): JSX.Element {
           <HeadingH2 text="Get started with Gscore today!" />
         </TitleBlock>
         <Blocks>
-          <LicenceBlock price="$77" sites="Single site" />
-          <LicenceBlock price="$117" sites="3 Site" />
-          <LicenceBlock price="$167" sites="10 Site" />
+          {state.isLoading ? (
+            <ClipLoader
+              loading={true}
+              size={150}
+              color={theme.colors.error}
+              css={loader}
+            />
+          ) : state.isError ? (
+            <ErrorComp err={state.error.message} />
+          ) : (
+            Object.values(state.products).map((product) => {
+              return (
+                <LicenceBlock
+                  key={product.id}
+                  price={product.prices[0].price}
+                  sites={product.name}
+                />
+              );
+            })
+          )}
         </Blocks>
         <OfferBlock>
           <OfferText>Have more than 10 sites?</OfferText>
@@ -43,6 +72,9 @@ const Blocks = styled.div`
       flex-direction: column;
     }
   `}
+`;
+const loader = css`
+  margin: 2rem;
 `;
 const TitleBlock = styled.div`
   display: flex;

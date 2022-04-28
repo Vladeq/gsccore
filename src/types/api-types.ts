@@ -1,6 +1,6 @@
 export interface SignUpDto {
   email?: string;
-  name?: string;
+  username?: string;
   password?: string;
 }
 export interface SignInDto {
@@ -12,7 +12,6 @@ export interface User {
   id: number;
   email: string;
   username: string;
-  password: string;
 }
 export interface Price {
   id: number;

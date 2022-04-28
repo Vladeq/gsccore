@@ -7,14 +7,13 @@ export function getProductsRequest() {
     url: '/api/products',
   });
 }
-export function SignUpRequest({ email, name, password }: SignUpDto) {
-  console.log({ email, name, password });
+export function SignUpRequest({ email, username, password }: SignUpDto) {
   return instance({
     method: 'POST',
     url: '/api/users/sign-up',
     data: {
       email,
-      name,
+      username,
       password,
     },
   });

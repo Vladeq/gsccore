@@ -7,9 +7,9 @@ export const userReducer = createSlice({
   initialState,
   reducers: {
     addUser(state, action) {
-      state.id = action.payload.id;
-      state.email = action.payload.email;
-      state.username = action.payload.name;
+      state.id = action.payload.user.id;
+      state.email = action.payload.user.email;
+      state.username = action.payload.user.username;
       state.token = action.payload.token;
       state.isError = false;
       state.error = null;

@@ -1,36 +1,20 @@
 import { InputHTMLAttributes } from 'react';
-import styled, { CSSProp } from 'styled-components';
+import styled, { css, CSSProp } from 'styled-components';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   rootCSS?: CSSProp;
 }
-function UIInput({
-  className,
-  rootCSS,
-  onChange,
-  placeholder,
-  value,
-  name,
-  onBlur,
-  onFocus,
-}: InputProps): JSX.Element {
-  return (
-    <Input
-      className={className}
-      onChange={onChange}
-      placeholder={placeholder}
-      value={value}
-      name={name}
-      onBlur={onBlur}
-      onFocus={onFocus}
-    />
-  );
+function UIInput({ className, rootCSS, ...inputProps }: InputProps): JSX.Element {
+  return <Input className={className} $CSS={rootCSS} {...inputProps} />;
 }
 
-const Input = styled.input`
-  width: 80%;
-  outline: none;
-  border: none;
+const Input = styled.input<{ $CSS?: CSSProp }>`
+  ${({ $CSS }) => css`
+    width: 80%;
+    outline: none;
+    border: none;
+    ${$CSS};
+  `};
 `;
-
 export default UIInput;

@@ -2,14 +2,14 @@ import axios from 'axios';
 import { AxiosRequestConfig } from 'axios';
 
 export const tokenInstance = axios.create({
-  baseURL: process.env.REQ_URL,
+  baseURL: process.env.REQEST_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 export const instance = axios.create({
-  baseURL: process.env.REQ_URL,
+  baseURL: process.env.REQEST_URL,
   headers: {
     'Content-Type': 'application/json',
   },

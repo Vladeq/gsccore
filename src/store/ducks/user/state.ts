@@ -14,5 +14,4 @@ export const initialState: UserState = {
   id: 0,
   email: '',
   username: '',
-  password: '',
 };

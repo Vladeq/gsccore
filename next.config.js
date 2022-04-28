@@ -11,6 +11,9 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     })
     return config
+  },
+  env: {
+    REQEST_URL: process.env.REQEST_URL,
   }
 }
 

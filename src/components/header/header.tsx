@@ -1,15 +1,16 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { Logo } from '../../assets/svg-react/index';
+import { RootState } from '../../store/index';
+import { UserMenu } from '../user-menu/index';
 
-interface HeaderProps {
-  headerRight?: JSX.Element;
-}
-function Header({ headerRight }: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
+  const state = useSelector((state: RootState) => state.user);
   return (
     <Heading>
       <Logo />
-      {headerRight}
+      {state.username ? <UserMenu user={state.username} /> : null}
     </Heading>
   );
 }

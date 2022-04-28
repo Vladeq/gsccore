@@ -8,6 +8,8 @@ export const productsReducer = createSlice({
   initialState,
   reducers: {
     renderProducts(state, action) {
+      state.isError = false;
+      state.error = null;
       state.products = action.payload.reduce(
         (accum: Record<number, Product>, current: Product) => {
           accum[current.id] = current;
@@ -16,7 +18,14 @@ export const productsReducer = createSlice({
         {},
       );
     },
+    setError(state, action) {
+      state.isError = true;
+      state.error = action.payload;
+    },
+    setLoading(state, action) {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { renderProducts } = productsReducer.actions;
+export const { renderProducts, setError, setLoading } = productsReducer.actions;

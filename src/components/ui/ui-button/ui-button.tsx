@@ -5,36 +5,26 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color: string;
   className?: string;
   rootCSS?: CSSProp;
+  children?: JSX.Element;
 }
 
 function UIButton({
   color,
   className,
-  type,
-  disabled,
-  value,
   rootCSS,
+  children,
+  ...buttonProps
 }: ButtonProps): JSX.Element {
   return (
-    <Button
-      className={className}
-      $color={color}
-      disabled={disabled}
-      type={type}
-      value={value}
-      $CSS={rootCSS}
-    >
-      {value}
+    <Button $color={color} className={className} $CSS={rootCSS} {...buttonProps}>
+      {children}
     </Button>
   );
 }
 
 const Button = styled.button<{ $color: string; $CSS?: CSSProp }>`
-  ${({ $color, theme, $CSS }) => css`
+  ${({ $color, $CSS }) => css`
     background: ${$color};
-    font-size: ${theme.sizes.extraSmall}rem;
-    font-weight: 700;
-    line-height: 1rem;
     border: none;
     border-radius: 4px;
     &:disabled {

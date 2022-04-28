@@ -9,14 +9,14 @@ import { addUser, setError, setLoading } from './user-reducer';
 
 function* signUpWorker(action: PayloadAction<SignUpDto>) {
   yield put(setLoading(true));
-  const { email, name, password } = action.payload;
+  const { email, username, password } = action.payload;
   try {
-    const responce: AxiosResponse = yield call(SignUpRequest, { email, name, password });
-    if (!responce.data.token) {
-      yield put(setError(responce.data.name));
-    } else {
-      yield put(addUser(responce.data));
-    }
+    const responce: AxiosResponse = yield call(SignUpRequest, {
+      email,
+      username,
+      password,
+    });
+    yield put(addUser(responce.data));
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));
@@ -31,11 +31,7 @@ function* signInWorker(action: PayloadAction<SignInDto>) {
   const { email, password } = action.payload;
   try {
     const responce: AxiosResponse = yield call(SignInRequest, { email, password });
-    if (!responce.data.token) {
-      yield put(setError(responce.data.name));
-    } else {
-      yield put(addUser(responce.data));
-    }
+    yield put(addUser(responce.data));
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));

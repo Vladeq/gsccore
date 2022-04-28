@@ -1,24 +1,35 @@
 import Link from 'next/link';
-import { useContext, useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useContext } from 'react';
+import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import ClipLoader from 'react-spinners/ClipLoader';
 import styled, { css, ThemeContext } from 'styled-components';
 
+import { ErrorComp } from '../components/error-comp';
 import { FormInput } from '../components/form-components/form-input';
+import { patterns } from '../components/form-components/patterns';
 import { HeadingH2 } from '../components/heading-h2';
+import { UiAnchor } from '../components/ui/ui-anchor';
 import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { StagePointer } from '../page-components/sign/stage-pointer';
+import { signUpAct } from '../store/ducks/user/user-actions';
+import { RootState } from '../store/index';
 import { SignUpDto } from '../types/api-types';
 
 export default function SignUp(): JSX.Element {
-  const { control, handleSubmit, getValues, setError, formState } = useForm<SignUpDto>({
-    defaultValues: { email: '', name: '', password: '' },
+  const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state.user);
+
+  const { control, handleSubmit, formState } = useForm<SignUpDto>({
+    defaultValues: { email: '', username: '', password: '' },
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<SignUpDto> = (data) => console.log(data);
+  const onSubmit = (data: SignUpDto) => {
+    dispatch(signUpAct(data));
+  };
   const theme = useContext(ThemeContext);
-
   return (
     <MainLayout>
       <Heading>
@@ -40,42 +51,57 @@ export default function SignUp(): JSX.Element {
             name={'email'}
             rules={{
               pattern: {
-                value:
-                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value: patterns.email,
                 message: 'Must be email',
               },
             }}
-            render={({ field, fieldState }) => (
-              <FormInput {...field} {...fieldState} placeholder={'Enter email'} />
+            render={(fieldRender: UseControllerReturn) => (
+              <FormInput {...fieldRender} placeholder={'Enter email'} />
             )}
           />
           <Controller
             control={control}
-            name="name"
+            name="username"
             rules={{ required: 'Name required' }}
-            render={({ field, fieldState }) => (
-              <FormInput {...field} {...fieldState} placeholder={'Enter name'} />
+            render={(fieldRender: UseControllerReturn) => (
+              <FormInput {...fieldRender} placeholder={'Enter name'} />
             )}
           />
           <Controller
             control={control}
             name="password"
-            rules={{ required: 'Password required' }}
-            render={({ field, fieldState }) => (
-              <FormInput {...field} {...fieldState} placeholder={'Enter password'} />
+            rules={{
+              minLength: {
+                value: 6,
+                message: 'Password must be longer than or equal to 6 characters',
+              },
+            }}
+            render={(fieldRender: UseControllerReturn) => (
+              <FormInput {...fieldRender} placeholder={'Enter password'} />
             )}
           />
-          <StyledButton
-            color={theme.colors.backgroundActiveElem}
-            type="submit"
-            disabled={!formState.isValid}
-            value={'Send password'}
-          />
+
+          <InfoBlock>
+            <StyledButton
+              color={theme.colors.backgroundActiveElem}
+              type="submit"
+              disabled={!formState.isValid}
+            >
+              {state.isLoading ? (
+                <ClipLoader loading={true} size={20} color={theme.colors.textPrimary} />
+              ) : (
+                <ButtonText>Send password</ButtonText>
+              )}
+            </StyledButton>
+            {state.isError ? <ErrorComp err={state.error.message} /> : null}
+          </InfoBlock>
         </Form>
         <DirectBlock>
           <DirectText>Have an account? </DirectText>
           <Link href="/sign-in">
-            <DirectA> Go to the next step</DirectA>
+            <UiAnchor color={theme.colors.backgroundActiveElem}>
+              Go to the next step
+            </UiAnchor>
           </Link>
         </DirectBlock>
       </Heading>
@@ -107,17 +133,35 @@ const Form = styled.form`
     }
   `}
 `;
+const InfoBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
 const StyledButton = styled(UIButton)`
   padding: 0.8rem;
   width: 40%;
   color: ${({ theme }) => theme.colors.textPrimary};
-  &:hover {
+  &:hover:enabled {
     background: ${({ theme }) => theme.colors.hoverButton};
+  }
+  &:active:enabled {
+    background: ${({ theme }) => theme.colors.backgroundActiveElem};
   }
   ${({ theme }) => css`
     @media ${theme.devices.mobileL} {
       width: 80%;
     }
+  `}
+`;
+const ButtonText = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.sizes.extraSmall}rem;
+    color: ${theme.colors.textPrimary};
+    font-weight: 700;
+    line-height: 1rem;
+    margin: 0;
   `}
 `;
 const Heading = styled.div`
@@ -190,18 +234,5 @@ const DirectText = styled.p`
     line-height: 1.8em;
     margin: 0;
     padding-right: 0.2rem;
-  `}
-`;
-const DirectA = styled.a`
-  ${({ theme }) => css`
-    font-family: ${theme.fonts.secondary};
-    color: ${theme.colors.backgroundActiveElem};
-    font-size: ${theme.sizes.extraSmall}rem;
-    text-align: center;
-    line-height: 1.8em;
-    &:hover {
-      color: ${({ theme }) => theme.colors.hoverButton};
-      cursor: pointer;
-    }
   `}
 `;
