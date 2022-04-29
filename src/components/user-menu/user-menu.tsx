@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import styled, { css, ThemeContext } from 'styled-components';
 
 import { Frame, Gear, VectorDown, VectorUp } from '../../assets/svg-react/index';
+import { hrefs } from '../../pages/hrefs';
 import { UiAnchor } from '../ui/ui-anchor';
 
 interface UserProps {
@@ -22,7 +23,7 @@ function UserMenu({ user }: UserProps): JSX.Element {
         <A
           color={theme.colors.textPrimary}
           onClick={() => {
-            setHide(!hide);
+            setHide((prevHide) => !prevHide);
           }}
         >
           {user}
@@ -33,7 +34,9 @@ function UserMenu({ user }: UserProps): JSX.Element {
         <DropDown>
           <DropItem>
             <Gear />
-            <A color={theme.colors.textPrimary}>Settings</A>
+            <Link href={hrefs.setPersonalInfo}>
+              <A color={theme.colors.textPrimary}>Settings</A>
+            </Link>
           </DropItem>
           <DropItem>
             <Frame />

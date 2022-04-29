@@ -7,6 +7,14 @@ export interface SignInDto {
   email?: string;
   password?: string;
 }
+export interface UpdatePersonalDataDto {
+  email: string;
+  username: string;
+}
+export interface UpdatePasswordDto {
+  currentPassword: string;
+  newPassword: string;
+}
 export interface User {
   token: string;
   id: number;

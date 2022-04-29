@@ -4,7 +4,7 @@ interface ErrorProps {
   err: any;
 }
 
-function ErrorComp({ err }: ErrorProps): JSX.Element {
+function ErrorComponent({ err }: ErrorProps): JSX.Element {
   return (
     <div>
       <Text>{err}</Text>
@@ -20,4 +20,4 @@ const Text = styled.p`
     margin: 0;
   `}
 `;
-export default ErrorComp;
+export default ErrorComponent;

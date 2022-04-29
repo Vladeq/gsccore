@@ -1,35 +1,61 @@
-import { ButtonHTMLAttributes } from 'react';
-import styled, { css, CSSProp } from 'styled-components';
+import React from 'react';
+import { ButtonHTMLAttributes, useContext } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
+import styled, { css, CSSProp, ThemeContext } from 'styled-components';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color: string;
+  buttonType: string;
   className?: string;
+  isLoading: boolean;
   rootCSS?: CSSProp;
-  children?: JSX.Element;
 }
 
 function UIButton({
-  color,
+  buttonType,
   className,
+  isLoading,
   rootCSS,
-  children,
+  value,
   ...buttonProps
 }: ButtonProps): JSX.Element {
+  const theme = useContext(ThemeContext);
+
   return (
-    <Button $color={color} className={className} $CSS={rootCSS} {...buttonProps}>
-      {children}
+    <Button
+      $buttonType={buttonType}
+      className={className}
+      $CSS={rootCSS}
+      {...buttonProps}
+    >
+      {isLoading ? (
+        <ClipLoader loading={true} size={20} color={theme.colors[buttonType].text} />
+      ) : (
+        value
+      )}
     </Button>
   );
 }
-
-const Button = styled.button<{ $color: string; $CSS?: CSSProp }>`
-  ${({ $color, $CSS }) => css`
-    background: ${$color};
+const Button = styled.button<{ $CSS?: CSSProp; $buttonType: string }>`
+  ${({ $CSS, theme, $buttonType }) => css`
+    background: ${theme.colors[$buttonType].initial};
     border: none;
     border-radius: 4px;
+    font-size: ${theme.sizes.extraSmall}rem;
+    font-weight: 700;
+    line-height: 1rem;
+    color: ${theme.colors[$buttonType].text};
+    margin: 0;
     &:disabled {
       opacity: 0.6;
       box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
+    }
+    &:hover:enabled {
+      background: ${({ theme }) => theme.colors[$buttonType].hover};
+      color: ${theme.colors[$buttonType].hoverText};
+    }
+    &:active:enabled {
+      background: ${({ theme }) => theme.colors[$buttonType].initial};
+      color: ${theme.colors[$buttonType].text};
     }
     ${$CSS};
   `};

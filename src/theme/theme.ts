@@ -13,6 +13,18 @@ export const theme = {
     valid: '#05C168',
     filled: '#969696',
     error: '#FF5A65',
+    primary: {
+      initial: '#FC5842',
+      hover: '#DC2B2B',
+      hoverText: '#FFFFFF',
+      text: '#FFFFFF',
+    },
+    secondary: {
+      initial: '#FFFFFF',
+      hover: '#FFFFFF',
+      hoverText: '#DC2B2B',
+      text: '#FC5842',
+    },
   },
   fonts: {
     secondary: 'Inter',

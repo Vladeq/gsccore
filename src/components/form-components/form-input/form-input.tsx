@@ -11,14 +11,14 @@ interface FormInputProps extends UseControllerReturn {
 
 function FormInput({ placeholder, ...fieldRender }: FormInputProps): JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
-  const hasError = fieldRender.fieldState.error;
-  const isDirty = fieldRender.fieldState.isDirty;
+  const { field, fieldState } = fieldRender;
+  const { error: hasError, isDirty: isDirty } = fieldState;
   return (
     <Heading>
       <Wrapper $hasError={hasError} $isFocused={isFocused} $isDirty={isDirty}>
         <UIInput
-          {...fieldRender.field}
-          {...fieldRender.fieldState}
+          {...field}
+          {...fieldState}
           placeholder={placeholder}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}

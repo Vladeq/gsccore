@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import ClipLoader from 'react-spinners/ClipLoader';
 import styled, { css, ThemeContext } from 'styled-components';
 
-import { ErrorComp } from '../components/error-comp';
+import { ErrorComponent } from '../components/error-component/index';
 import { HeadingH2 } from '../components/heading-h2';
 import { MainLayout } from '../layouts/main-layout';
 import { LicenceBlock } from '../page-components/index/licence-block';
 import { RootState } from '../store';
 import { getProductsAct } from '../store/ducks/products/products-actions';
+import { selectProduct } from '../store/selectors';
 
 export default function Home(): JSX.Element {
   const theme = useContext(ThemeContext);
@@ -17,6 +18,7 @@ export default function Home(): JSX.Element {
     dispatch(getProductsAct());
   }, []);
   const state = useSelector((state: RootState) => state.products);
+  const products = useSelector((state: RootState) => selectProduct(state.products));
   return (
     <MainLayout>
       <Heading>
@@ -32,9 +34,9 @@ export default function Home(): JSX.Element {
               css={loader}
             />
           ) : state.isError ? (
-            <ErrorComp err={state.error.message} />
+            <ErrorComponent err={state.error.message} />
           ) : (
-            Object.values(state.products).map((product) => {
+            products.map((product) => {
               return (
                 <LicenceBlock
                   key={product.id}

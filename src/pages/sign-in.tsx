@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import ClipLoader from 'react-spinners/ClipLoader';
 import styled, { css, ThemeContext } from 'styled-components';
 
-import { ErrorComp } from '../components/error-comp';
+import { ErrorComponent } from '../components/error-component/index';
 import { FormInput } from '../components/form-components/form-input';
 import { patterns } from '../components/form-components/patterns';
 import { HeadingH2 } from '../components/heading-h2';
@@ -70,17 +69,13 @@ export default function SignUp(): JSX.Element {
           />
           <InfoBlock>
             <StyledButton
-              color={theme.colors.backgroundActiveElem}
+              buttonType="primary"
               type="submit"
               disabled={!formState.isValid}
-            >
-              {state.isLoading ? (
-                <ClipLoader loading={true} size={20} color={theme.colors.textPrimary} />
-              ) : (
-                <ButtonText>Log in</ButtonText>
-              )}
-            </StyledButton>
-            {state.isError ? <ErrorComp err={state.error.message} /> : null}
+              value="Log in"
+              isLoading={state.isLoading}
+            />
+            {state.isError ? <ErrorComponent err={state.error.message} /> : null}
           </InfoBlock>
         </Form>
       </Heading>
@@ -121,26 +116,10 @@ const InfoBlock = styled.div`
 const StyledButton = styled(UIButton)`
   padding: 0.8rem;
   width: 40%;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  &:hover:enabled {
-    background: ${({ theme }) => theme.colors.hoverButton};
-  }
-  &:active:enabled {
-    background: ${({ theme }) => theme.colors.backgroundActiveElem};
-  }
   ${({ theme }) => css`
     @media ${theme.devices.mobileL} {
       width: 80%;
     }
-  `}
-`;
-const ButtonText = styled.p`
-  ${({ theme }) => css`
-    font-size: ${theme.sizes.extraSmall}rem;
-    color: ${theme.colors.textPrimary};
-    font-weight: 700;
-    line-height: 1rem;
-    margin: 0;
   `}
 `;
 const Heading = styled.div`

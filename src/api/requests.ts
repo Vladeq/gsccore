@@ -1,4 +1,9 @@
-import { SignInDto, SignUpDto } from '../types/api-types';
+import {
+  SignInDto,
+  SignUpDto,
+  UpdatePasswordDto,
+  UpdatePersonalDataDto,
+} from '../types/api-types';
 import { instance, tokenInstance } from './instances';
 
 export function getProductsRequest() {
@@ -8,24 +13,23 @@ export function getProductsRequest() {
   });
 }
 export function SignUpRequest({ email, username, password }: SignUpDto) {
-  return instance({
-    method: 'POST',
-    url: '/api/users/sign-up',
-    data: {
-      email,
-      username,
-      password,
-    },
-  });
+  return instance.post('api/users/sign-up', { email, username, password });
 }
 
 export function SignInRequest({ email, password }: SignInDto) {
-  return instance({
-    method: 'POST',
-    url: '/api/users/sign-in',
-    data: {
-      email,
-      password,
-    },
+  return instance.post('api/users/sign-in', { email, password });
+}
+
+export function UpdatePersonalDataRequest({ email, username }: UpdatePersonalDataDto) {
+  return tokenInstance.patch('/api/users', { email, username });
+}
+
+export function UpdatePasswordRequest({
+  currentPassword,
+  newPassword,
+}: UpdatePasswordDto) {
+  return tokenInstance.patch('/api/users/update-password', {
+    currentPassword,
+    newPassword,
   });
 }

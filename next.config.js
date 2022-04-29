@@ -13,7 +13,7 @@ const nextConfig = {
     return config
   },
   env: {
-    REQEST_URL: process.env.REQEST_URL,
+    REQUEST_URL: process.env.REQUEST_URL,
   }
 }
 
