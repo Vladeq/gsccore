@@ -13,6 +13,12 @@ export const theme = {
     valid: '#05C168',
     filled: '#969696',
     error: '#FF5A65',
+    active: {
+      background: '#FC5842',
+    },
+    inactive: {
+      background: '#393939',
+    },
     primary: {
       initial: '#FC5842',
       hover: '#DC2B2B',

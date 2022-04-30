@@ -2,23 +2,25 @@ import { AnchorHTMLAttributes } from 'react';
 import styled, { css, CSSProp } from 'styled-components';
 
 interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  color: string;
+  isActive: boolean;
   className?: string;
   rootCSS?: CSSProp;
 }
 function UiAnchor({
-  color,
+  isActive,
   className,
   rootCSS,
   ...anchorProps
 }: AnchorProps): JSX.Element {
-  return <A $color={color} className={className} $CSS={rootCSS} {...anchorProps} />;
+  return <A $isActive={isActive} className={className} $CSS={rootCSS} {...anchorProps} />;
 }
 
-const A = styled.a<{ $color: string; $CSS?: CSSProp }>`
-  ${({ $color, $CSS, theme }) => css`
+const A = styled.a<{ $isActive: boolean; $CSS?: CSSProp }>`
+  ${({ $isActive, $CSS, theme }) => css`
     font-family: ${theme.fonts.secondary};
-    color: ${$color};
+    color: ${
+      $isActive ? theme.colors.active.background : theme.colors.inactive.background
+    }};
     font-size: ${theme.sizes.extraSmall}rem;
     text-align: center;
     line-height: 22px;

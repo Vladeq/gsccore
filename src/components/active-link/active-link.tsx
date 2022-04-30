@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { UiAnchor } from '../ui/ui-anchor/index';
 
@@ -12,21 +11,20 @@ interface LinkProps {
 
 function ActiveLink({ href, text }: LinkProps): JSX.Element {
   const router = useRouter();
-  const theme = useContext(ThemeContext);
-  const color =
-    router.asPath == href ? theme.colors.backgroundActiveElem : theme.colors.neutral;
+  const isActive = router.asPath === href;
   return (
-    <Heading $color={color}>
-      <Link href={href}>
-        <UiAnchor color={color}>{text}</UiAnchor>
+    <Heading $isActive={isActive}>
+      <Link href={href} passHref={true}>
+        <UiAnchor isActive={isActive}>{text}</UiAnchor>
       </Link>
     </Heading>
   );
 }
 
-const Heading = styled.div<{ $color: string }>`
-  ${({ $color }) => css`
-    border-bottom: 2px solid ${$color};
+const Heading = styled.div<{ $isActive: boolean }>`
+  ${({ $isActive, theme }) => css`
+    border-bottom: 2px solid
+      ${$isActive ? theme.colors.active.background : theme.colors.inactive.background};
     padding: 1rem;
     height: 14px;
   `}
