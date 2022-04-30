@@ -5,6 +5,7 @@ interface LicenceBlockProps {
   sites: string;
 }
 import { Checked } from '../../../assets/svg-react/index';
+import { hrefs } from '../../../routes/client';
 
 function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
   return (
@@ -32,7 +33,7 @@ function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
         </Li>
       </LiBlock>
       <LinkBlock>
-        <Link href="/sign-up" passHref>
+        <Link href={hrefs.signup} passHref>
           <LinkText>Get Gscore</LinkText>
         </Link>
       </LinkBlock>

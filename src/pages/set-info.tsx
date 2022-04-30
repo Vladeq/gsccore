@@ -8,9 +8,9 @@ import { patterns } from '../components/form-components/patterns';
 import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { UserSettingsLayout } from '../layouts/user-settings-layout';
+import { updatePersonalDataAct } from '../store/ducks/user/user-actions';
 import { RootState } from '../store/index';
 import { UpdatePersonalDataDto } from '../types/api-types';
-
 export default function SetInfo(): JSX.Element {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.user);
@@ -21,7 +21,7 @@ export default function SetInfo(): JSX.Element {
   });
 
   const onSubmit = (data: UpdatePersonalDataDto) => {
-    console.log(data);
+    dispatch(updatePersonalDataAct(data));
   };
   return (
     <MainLayout>
@@ -55,10 +55,10 @@ export default function SetInfo(): JSX.Element {
                 buttonType="primary"
                 type="submit"
                 disabled={!formState.isValid}
-                value="Log in"
+                value="Save"
                 isLoading={state.isLoading}
               />
-              {state.isError ? <ErrorComponent err={state.error.message} /> : null}
+              {!!state.isError && <ErrorComponent err={state.error.message} />}
             </InfoBlock>
           </Form>
         </Heading>

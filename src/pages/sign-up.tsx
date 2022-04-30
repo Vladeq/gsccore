@@ -12,6 +12,7 @@ import { UiAnchor } from '../components/ui/ui-anchor';
 import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { StagePointer } from '../page-components/sign/stage-pointer';
+import { hrefs } from '../routes/client';
 import { signUpAct } from '../store/ducks/user/user-actions';
 import { RootState } from '../store/index';
 import { SignUpDto } from '../types/api-types';
@@ -88,12 +89,12 @@ export default function SignUp(): JSX.Element {
               value="Log in"
               isLoading={state.isLoading}
             />
-            {state.isError ? <ErrorComponent err={state.error.message} /> : null}
+            {!!state.isError && <ErrorComponent err={state.error.message} />}
           </InfoBlock>
         </Form>
         <DirectBlock>
           <DirectText>Have an account? </DirectText>
-          <Link href="/sign-in">
+          <Link href={hrefs.signin}>
             <UiAnchor color={theme.colors.backgroundActiveElem}>
               Go to the next step
             </UiAnchor>

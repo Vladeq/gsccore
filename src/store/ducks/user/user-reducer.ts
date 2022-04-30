@@ -23,6 +23,10 @@ export const userReducer = createSlice({
       state.error = null;
       state.isLoading = false;
     },
+    updateData(state, action) {
+      state.username = action.payload.username;
+      state.email = action.payload.password;
+    },
     setError(state, action) {
       state.isError = true;
       state.error = action.payload;
@@ -32,4 +36,4 @@ export const userReducer = createSlice({
     },
   },
 });
-export const { addUser, signOut, setError, setLoading } = userReducer.actions;
+export const { addUser, signOut, setError, setLoading, updateData } = userReducer.actions;

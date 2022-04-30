@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { ActiveLink } from '../../components/active-link';
 import { HeadingH2 } from '../../components/heading-h2';
-import { hrefs } from '../../pages/hrefs';
+import { hrefs } from '../../routes/client';
 
 interface UserSettingsProps {
   children: JSX.Element;
@@ -11,7 +11,6 @@ interface UserSettingsProps {
 
 function UserSettingsLayout({ children }: UserSettingsProps): JSX.Element {
   const router = useRouter();
-  console.log(router);
   return (
     <Heading>
       <TitleBlock>

@@ -50,11 +50,11 @@ const Button = styled.button<{ $CSS?: CSSProp; $buttonType: string }>`
       box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
     }
     &:hover:enabled {
-      background: ${({ theme }) => theme.colors[$buttonType].hover};
+      background: ${theme.colors[$buttonType].hover};
       color: ${theme.colors[$buttonType].hoverText};
     }
     &:active:enabled {
-      background: ${({ theme }) => theme.colors[$buttonType].initial};
+      background: ${theme.colors[$buttonType].initial};
       color: ${theme.colors[$buttonType].text};
     }
     ${$CSS};

@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { useContext, useState } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import { useDispatch } from 'react-redux';
+import styled, { ThemeContext } from 'styled-components';
 
 import { Frame, Gear, VectorDown, VectorUp } from '../../assets/svg-react/index';
-import { hrefs } from '../../pages/hrefs';
+import { hrefs } from '../../routes/client';
+import { signOut } from '../../store/ducks/user/user-reducer';
 import { UiAnchor } from '../ui/ui-anchor';
 
 interface UserProps {
@@ -12,6 +14,7 @@ interface UserProps {
 function UserMenu({ user }: UserProps): JSX.Element {
   const theme = useContext(ThemeContext);
   const [hide, setHide] = useState(false);
+  const dispatch = useDispatch();
   return (
     <Heading>
       <Item>
@@ -40,7 +43,11 @@ function UserMenu({ user }: UserProps): JSX.Element {
           </DropItem>
           <DropItem>
             <Frame />
-            <A color={theme.colors.textPrimary}>Log out</A>
+            <Link href={hrefs.signin}>
+              <A onClick={() => dispatch(signOut())} color={theme.colors.textPrimary}>
+                Log out
+              </A>
+            </Link>
           </DropItem>
         </DropDown>
       ) : null}

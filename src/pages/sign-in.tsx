@@ -75,7 +75,7 @@ export default function SignUp(): JSX.Element {
               value="Log in"
               isLoading={state.isLoading}
             />
-            {state.isError ? <ErrorComponent err={state.error.message} /> : null}
+            {!!state.isError && <ErrorComponent err={state.error.message} />}
           </InfoBlock>
         </Form>
       </Heading>
