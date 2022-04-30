@@ -1,11 +1,23 @@
+import styled, { css, CSSProp } from 'styled-components';
+
 import GscoreLogo from './logo.svg';
 
-function Logo(): JSX.Element {
+interface LogoProps {
+  className?: string;
+  rootCSS?: CSSProp;
+}
+function Logo({ className, rootCSS }: LogoProps): JSX.Element {
   return (
-    <div>
+    <Block className={className} $CSS={rootCSS}>
       <GscoreLogo />
-    </div>
+    </Block>
   );
 }
+
+const Block = styled.div<{ $CSS?: CSSProp }>`
+  ${({ $CSS }) => css`
+    ${$CSS};
+  `}
+`;
 
 export default Logo;
