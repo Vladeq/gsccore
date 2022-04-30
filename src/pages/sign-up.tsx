@@ -86,7 +86,7 @@ export default function SignUp(): JSX.Element {
               buttonType="primary"
               type="submit"
               disabled={!formState.isValid}
-              value="Log in"
+              value="Sign up"
               isLoading={state.isLoading}
             />
             {!!state.isError && <ErrorComponent err={state.error.message} />}
