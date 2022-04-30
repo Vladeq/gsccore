@@ -2,10 +2,10 @@ import { ButtonHTMLAttributes, useContext } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import styled, { css, CSSProp, ThemeContext } from 'styled-components';
 
-import { ButtonVariant } from '../../../types/button-types';
+import { UIComponentsVariant } from '../../../types/button-types';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonType: ButtonVariant;
+  buttonType: UIComponentsVariant;
   className?: string;
   isLoading: boolean;
   rootCSS?: CSSProp;

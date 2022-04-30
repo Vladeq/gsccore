@@ -14,10 +14,12 @@ export const theme = {
     filled: '#969696',
     error: '#FF5A65',
     active: {
-      background: '#FC5842',
+      primary: '#FC5842',
+      secondary: '#969696',
     },
     inactive: {
-      background: '#393939',
+      primary: '#393939',
+      secondary: '#FFFFFF',
     },
     primary: {
       initial: '#FC5842',

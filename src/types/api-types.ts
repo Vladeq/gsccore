@@ -33,3 +33,9 @@ export interface Product {
   name: string;
   prices: [Price];
 }
+export interface Subscribe {
+  id: number;
+  userId: number;
+  currentPeriodStart: number;
+  currentPeriodEnd: number;
+}

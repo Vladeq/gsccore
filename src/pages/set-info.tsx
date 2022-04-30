@@ -1,6 +1,6 @@
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ErrorComponent } from '../components/error-component/index';
 import { FormInput } from '../components/form-components/form-input';
@@ -11,6 +11,7 @@ import { UserSettingsLayout } from '../layouts/user-settings-layout';
 import { updatePersonalDataAct } from '../store/ducks/user/user-actions';
 import { RootState } from '../store/index';
 import { UpdatePersonalDataDto } from '../types/api-types';
+
 export default function SetInfo(): JSX.Element {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.user);

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
 import { ActiveLink } from '../../components/active-link';
@@ -10,15 +9,18 @@ interface UserSettingsProps {
 }
 
 function UserSettingsLayout({ children }: UserSettingsProps): JSX.Element {
-  const router = useRouter();
   return (
     <Heading>
       <TitleBlock>
         <HeadingH2 text="Settings" />
       </TitleBlock>
       <LinksBlock>
-        <ActiveLink href={hrefs.setPersonalInfo} text="Personal info" />
-        <ActiveLink href={hrefs.setPassword} text="Change password" />
+        <ActiveLink
+          linkType="primary"
+          href={hrefs.setPersonalInfo}
+          text="Personal info"
+        />
+        <ActiveLink linkType="primary" href={hrefs.setPassword} text="Change password" />
       </LinksBlock>
       {children}
     </Heading>

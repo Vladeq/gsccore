@@ -4,4 +4,5 @@ export const hrefs = {
   signup: '/sign-up',
   setPersonalInfo: '/set-info',
   setPassword: '/set-password',
+  subscriptions: '/my-subscriptions',
 };

@@ -18,13 +18,13 @@ function UserMenu({ user }: UserProps): JSX.Element {
   return (
     <Heading>
       <Item>
-        <Link href="/">
-          <A color={theme.colors.textPrimary}>My subscription</A>
+        <Link href={hrefs.subscriptions} passHref={true}>
+          <A anchorType="secondary">My subscription</A>
         </Link>
       </Item>
       <Item>
         <A
-          color={theme.colors.textPrimary}
+          anchorType="secondary"
           onClick={() => {
             setHide((prevHide) => !prevHide);
           }}
@@ -38,13 +38,13 @@ function UserMenu({ user }: UserProps): JSX.Element {
           <DropItem>
             <Gear />
             <Link href={hrefs.setPersonalInfo}>
-              <A color={theme.colors.textPrimary}>Settings</A>
+              <A anchorType="secondary">Settings</A>
             </Link>
           </DropItem>
           <DropItem>
             <Frame />
             <Link href={hrefs.signin}>
-              <A onClick={() => dispatch(signOut())} color={theme.colors.textPrimary}>
+              <A anchorType="secondary" onClick={() => dispatch(signOut())}>
                 Log out
               </A>
             </Link>

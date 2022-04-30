@@ -7,10 +7,7 @@ import {
 import { instance, tokenInstance } from './instances';
 
 export function getProductsRequest() {
-  return instance({
-    method: 'GET',
-    url: '/api/products',
-  });
+  return instance.get('/api/products');
 }
 export function SignUpRequest({ email, username, password }: SignUpDto) {
   return instance.post('api/users/sign-up', { email, username, password });
@@ -32,4 +29,8 @@ export function UpdatePasswordRequest({
     currentPassword,
     newPassword,
   });
+}
+
+export function getSubscribesRequest() {
+  return tokenInstance.get('/api/subscribe/self');
 }
