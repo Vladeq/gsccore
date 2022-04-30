@@ -9,7 +9,7 @@ import { MainLayout } from '../layouts/main-layout';
 import { LicenceBlock } from '../page-components/index/licence-block';
 import { RootState } from '../store';
 import { getProductsAct } from '../store/ducks/products/products-actions';
-import { selectProduct } from '../store/selectors';
+import { selectProduct } from '../store/ducks/products/products-selectors';
 
 export default function Home(): JSX.Element {
   const theme = useContext(ThemeContext);

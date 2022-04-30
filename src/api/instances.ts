@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { AxiosRequestConfig } from 'axios';
 
+import { selectToken } from '../store/ducks/user/user-selectors';
 import { store } from '../store/index';
-import { selectToken } from '../store/selectors';
 
 export const tokenInstance = axios.create({
   baseURL: process.env.REQUEST_URL,
