@@ -36,7 +36,7 @@ export default function GscoreApp({ Component, pageProps }: AppProps): JSX.Eleme
 const GlobalStyle = createGlobalStyle`
 @font-face {
     font-family: 'THICCCBOI';
-    src: url("/public/fonts/THICCCBOI-Medium") format("woff2");
+    src: url("/fonts/THICCCBOI-Medium.woff2") format("woff2");
     font-display: fallback;
 }
 html {

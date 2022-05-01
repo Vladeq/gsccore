@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 
 import { Frame, Gear, VectorDown, VectorUp } from '../../assets/svg-react/index';
+import useToggle from '../../hooks/use-toggle';
 import { hrefs } from '../../routes/client';
 import { signOut } from '../../store/ducks/user/user-reducer';
 import { UiAnchor } from '../ui/ui-anchor';
@@ -12,8 +13,8 @@ interface UserProps {
   user: string;
 }
 function UserMenu({ user }: UserProps): JSX.Element {
-  const theme = useContext(ThemeContext);
-  const [hide, setHide] = useState(false);
+  // const [hide, setHide] = useState(false);
+  const { isOpened, open, close, toggle } = useToggle();
   const dispatch = useDispatch();
   return (
     <Heading>
@@ -26,14 +27,14 @@ function UserMenu({ user }: UserProps): JSX.Element {
         <A
           anchorType="secondary"
           onClick={() => {
-            setHide((prevHide) => !prevHide);
+            toggle((prevState) => !prevState);
           }}
         >
           {user}
         </A>
-        {hide ? <VectorUp /> : <VectorDown />}
+        {isOpened ? <VectorUp /> : <VectorDown />}
       </Item>
-      {hide ? (
+      {isOpened ? (
         <DropDown>
           <DropItem>
             <Gear />
