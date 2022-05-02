@@ -1,33 +1,14 @@
 import Link from 'next/link';
-import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { ErrorComponent } from '../components/error-component/index';
-import { FormInput } from '../components/form-components/form-input';
-import { patterns } from '../components/form-components/patterns';
 import { HeadingH2 } from '../components/heading-h2';
 import { UiAnchor } from '../components/ui/ui-anchor';
-import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
+import { SignUpForm } from '../page-components/sign/sign-up-form';
 import { StagePointer } from '../page-components/sign/stage-pointer';
 import { hrefs } from '../routes/client';
-import { signUpAct } from '../store/ducks/user/user-actions';
-import { RootState } from '../store/index';
-import { SignUpDto } from '../types/api-types';
 
 export default function SignUp(): JSX.Element {
-  const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.user);
-
-  const { control, handleSubmit, formState } = useForm<SignUpDto>({
-    defaultValues: { email: '', username: '', password: '' },
-    mode: 'onChange',
-  });
-
-  const onSubmit = (data: SignUpDto) => {
-    dispatch(signUpAct(data));
-  };
   return (
     <MainLayout>
       <Heading>
@@ -43,53 +24,7 @@ export default function SignUp(): JSX.Element {
             by email
           </Text>
         </TitleBlock>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            control={control}
-            name={'email'}
-            rules={{
-              pattern: {
-                value: patterns.email,
-                message: 'Must be email',
-              },
-            }}
-            render={(fieldRender: UseControllerReturn) => (
-              <FormInput {...fieldRender} placeholder={'Enter email'} />
-            )}
-          />
-          <Controller
-            control={control}
-            name="username"
-            rules={{ required: 'Name required' }}
-            render={(fieldRender: UseControllerReturn) => (
-              <FormInput {...fieldRender} placeholder={'Enter name'} />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            rules={{
-              minLength: {
-                value: 6,
-                message: 'Password must be longer than or equal to 6 characters',
-              },
-            }}
-            render={(fieldRender: UseControllerReturn) => (
-              <FormInput {...fieldRender} placeholder={'Enter password'} />
-            )}
-          />
-
-          <InfoBlock>
-            <StyledButton
-              buttonType="primary"
-              type="submit"
-              disabled={!formState.isValid}
-              value="Sign up"
-              isLoading={state.isLoading}
-            />
-            {!!state.isError && <ErrorComponent err={state.error.message} />}
-          </InfoBlock>
-        </Form>
+        <SignUpForm />
         <DirectBlock>
           <DirectText>Have an account? </DirectText>
           <Link href={hrefs.signin}>
@@ -109,34 +44,6 @@ const Pointer = styled(StagePointer)`
     }
     @media ${theme.devices.mobileL} {
       width: 7rem;
-    }
-  `}
-`;
-const Form = styled.form`
-  width: 35rem;
-  display: flex;
-  flex-direction: column;
-  ${({ theme }) => css`
-    @media ${theme.devices.tabletS} {
-      width: 25rem;
-    }
-    @media ${theme.devices.mobileL} {
-      width: 15rem;
-    }
-  `}
-`;
-const InfoBlock = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-`;
-const StyledButton = styled(UIButton)`
-  padding: 0.8rem;
-  width: 40%;
-  ${({ theme }) => css`
-    @media ${theme.devices.mobileL} {
-      width: 80%;
     }
   `}
 `;

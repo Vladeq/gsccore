@@ -40,7 +40,6 @@ export const theme = {
       hoverText: '#DC2B2B',
       text: '#FC5842',
     },
-
   },
   fonts: {
     secondary: 'Inter',
