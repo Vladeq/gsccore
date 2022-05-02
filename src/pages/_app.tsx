@@ -37,6 +37,8 @@ const GlobalStyle = createGlobalStyle`
 @font-face {
     font-family: 'THICCCBOI';
     src: url("/fonts/THICCCBOI-Medium.woff2") format("woff2");
+    src: url("/fonts/THICCCBOI-Bold.woff2") format("woff2");
+    src: url("/fonts/THICCCBOI-Regular.woff2") format("woff2");
     font-display: fallback;
 }
 html {

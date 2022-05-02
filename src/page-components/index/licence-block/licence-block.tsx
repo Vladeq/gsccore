@@ -11,7 +11,7 @@ function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
   return (
     <Heading>
       <BlockInfo>
-        <Price>{price}</Price>
+        <Price>${price}</Price>
         <LicenceText>{sites} license</LicenceText>
         <InfoText>
           Get the advanced WordPress plugin that optimizes content with GSC keywords at

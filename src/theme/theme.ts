@@ -13,6 +13,11 @@ export const theme = {
     valid: '#05C168',
     filled: '#969696',
     error: '#FF5A65',
+    status: {
+      Active: '#05C168',
+      Inactive: '#FF5A65',
+      Hold: '#FF9E2C',
+    },
     active: {
       primary: '#FC5842',
       secondary: '#969696',
@@ -41,6 +46,7 @@ export const theme = {
   sizes: {
     extraSmall: '0.8',
     small: '1',
+    normal: '1.2',
     medium: '1.5',
     title: '2.4',
     big: '3',

@@ -13,8 +13,7 @@ interface UserProps {
   user: string;
 }
 function UserMenu({ user }: UserProps): JSX.Element {
-  // const [hide, setHide] = useState(false);
-  const { isOpened, open, close, toggle } = useToggle();
+  const { isOpened, toggle } = useToggle(false);
   const dispatch = useDispatch();
   return (
     <Heading>
