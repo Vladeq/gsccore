@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useContext } from 'react';
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css, ThemeContext } from 'styled-components';
@@ -29,14 +28,13 @@ export default function SignUp(): JSX.Element {
   const onSubmit = (data: SignUpDto) => {
     dispatch(signUpAct(data));
   };
-  const theme = useContext(ThemeContext);
   return (
     <MainLayout>
       <Heading>
         <Pointers>
-          <Pointer color={theme.colors.backgroundActiveElem} text="Create account" />
-          <Pointer color={theme.colors.neutral} text="Login" />
-          <Pointer color={theme.colors.neutral} text="Checkout" />
+          <Pointer isActive={true} href={hrefs.signup} text="Create account" />
+          <Pointer isActive={false} href={hrefs.signin} text="Login" />
+          <Pointer isActive={false} href={hrefs.checkout} text="Checkout" />
         </Pointers>
         <TitleBlock>
           <HeadingH2 text="Create account" />
@@ -95,9 +93,7 @@ export default function SignUp(): JSX.Element {
         <DirectBlock>
           <DirectText>Have an account? </DirectText>
           <Link href={hrefs.signin}>
-            <UiAnchor color={theme.colors.backgroundActiveElem}>
-              Go to the next step
-            </UiAnchor>
+            <UiAnchor anchorType="main">Go to the next step</UiAnchor>
           </Link>
         </DirectBlock>
       </Heading>
@@ -187,7 +183,7 @@ const Text = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.textPrimary};
     font-size: ${theme.sizes.extraSmall}rem;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px;
     margin: 0.5rem 1rem 0.5rem 1rem;
   `}

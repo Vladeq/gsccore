@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { useContext } from 'react';
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ErrorComponent } from '../components/error-component/index';
 import { FormInput } from '../components/form-components/form-input';
@@ -11,6 +10,7 @@ import { HeadingH2 } from '../components/heading-h2';
 import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { StagePointer } from '../page-components/sign/stage-pointer';
+import { hrefs } from '../routes/client';
 import { RootState } from '../store';
 import { signInAct } from '../store/ducks/user/user-actions';
 import { SignInDto } from '../types/api-types';
@@ -27,15 +27,14 @@ export default function SignUp(): JSX.Element {
   const onSubmit = (data: SignInDto) => {
     dispatch(signInAct(data));
   };
-  const theme = useContext(ThemeContext);
 
   return (
     <MainLayout>
       <Heading>
         <Pointers>
-          <Pointer color={theme.colors.backgroundActiveElem} text="Create account" />
-          <Pointer color={theme.colors.backgroundActiveElem} text="Login" />
-          <Pointer color={theme.colors.neutral} text="Checkout" />
+          <Pointer isActive={true} href={hrefs.signup} text="Create account" />
+          <Pointer isActive={true} href={hrefs.signin} text="Login" />
+          <Pointer isActive={false} href={hrefs.checkout} text="Checkout" />
         </Pointers>
         <TitleBlock>
           <HeadingH2 text="Log in" />

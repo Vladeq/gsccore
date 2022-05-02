@@ -21,10 +21,12 @@ export const theme = {
     active: {
       primary: '#FC5842',
       secondary: '#969696',
+      main: '#393939',
     },
     inactive: {
       primary: '#393939',
       secondary: '#FFFFFF',
+      main: '#FC5842',
     },
     primary: {
       initial: '#FC5842',
@@ -38,6 +40,7 @@ export const theme = {
       hoverText: '#DC2B2B',
       text: '#FC5842',
     },
+
   },
   fonts: {
     secondary: 'Inter',

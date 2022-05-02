@@ -33,7 +33,7 @@ function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
         </Li>
       </LiBlock>
       <LinkBlock>
-        <Link href={hrefs.signup} passHref>
+        <Link href={hrefs.signin} passHref>
           <LinkText>Get Gscore</LinkText>
         </Link>
       </LinkBlock>
