@@ -1,6 +1,11 @@
+export { default as ArrowLeft } from './arrow-left';
+export { default as ArrowRight } from './arrow-right';
+export { default as Basket } from './basket';
 export { default as Check } from './check';
 export { default as Checked } from './checked';
 export { default as Close } from './close';
+export { default as Copy } from './copy';
+export { default as Empty } from './empty';
 export { default as Facebook } from './facebook';
 export { default as Frame } from './frame';
 export { default as Gear } from './gear';
