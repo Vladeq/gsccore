@@ -1,13 +1,18 @@
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
+
+import { Checked } from '../../../assets/svg-react/index';
+import { hrefs } from '../../../routes/client';
+import { RootState } from '../../../store';
+
 interface LicenceBlockProps {
+  id: number;
   price: string;
   sites: string;
 }
-import { Checked } from '../../../assets/svg-react/index';
-import { hrefs } from '../../../routes/client';
-
-function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
+function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
+  const { username } = useSelector((state: RootState) => state.user);
   return (
     <Heading>
       <BlockInfo>
@@ -33,7 +38,14 @@ function LicenceBlock({ price, sites }: LicenceBlockProps): JSX.Element {
         </Li>
       </LiBlock>
       <LinkBlock>
-        <Link href={hrefs.signin} passHref>
+        <Link
+          href={
+            username
+              ? { pathname: hrefs.checkout, query: { id } }
+              : { pathname: hrefs.signup, query: { id } }
+          }
+          passHref={true}
+        >
           <LinkText>Get Gscore</LinkText>
         </Link>
       </LinkBlock>

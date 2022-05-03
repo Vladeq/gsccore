@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
@@ -6,12 +8,15 @@ import { ErrorComponent } from '../../../components/error-component';
 import { FormInput } from '../../../components/form-components/form-input';
 import { patterns } from '../../../components/form-components/patterns';
 import { UIButton } from '../../../components/ui/ui-button';
+import { hrefs } from '../../../routes/client';
 import { RootState } from '../../../store';
 import { signInAct } from '../../../store/ducks/user/user-actions';
 import { SignInDto } from '../../../types/api-types';
 
 function SignInForm(): JSX.Element {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { id } = router.query;
   const state = useSelector((state: RootState) => state.user);
 
   const { control, handleSubmit, formState } = useForm<SignInDto>({
@@ -51,13 +56,16 @@ function SignInForm(): JSX.Element {
         )}
       />
       <InfoBlock>
-        <StyledButton
-          buttonType="primary"
-          type="submit"
-          disabled={!formState.isValid}
-          value="Log in"
-          isLoading={state.isLoading}
-        />
+        <Link href={{ pathname: hrefs.checkout, query: { id } }}>
+          <StyledButton
+            buttonType="primary"
+            type="submit"
+            disabled={!formState.isValid}
+            value="Log in"
+            isLoading={state.isLoading}
+          />
+        </Link>
+
         {!!state.isError && <ErrorComponent err={state.error.message} />}
       </InfoBlock>
     </Form>

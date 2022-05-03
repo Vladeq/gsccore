@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
 import { HeadingH2 } from '../components/heading-h2';
@@ -9,6 +10,8 @@ import { StagePointer } from '../page-components/sign/stage-pointer';
 import { hrefs } from '../routes/client';
 
 export default function SignUp(): JSX.Element {
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <MainLayout>
       <Heading>
@@ -27,7 +30,7 @@ export default function SignUp(): JSX.Element {
         <SignUpForm />
         <DirectBlock>
           <DirectText>Have an account? </DirectText>
-          <Link href={hrefs.signin}>
+          <Link href={{ pathname: hrefs.signin, query: { id } }} passHref={true}>
             <UiAnchor anchorType="main">Go to the next step</UiAnchor>
           </Link>
         </DirectBlock>

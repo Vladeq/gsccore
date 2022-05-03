@@ -1,9 +1,10 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { Logo } from '../../assets/svg-react/index';
 
 interface HeaderProps {
-  headerRight?: JSX.Element;
+  headerRight?: ReactNode;
 }
 
 function Header({ headerRight }: HeaderProps): JSX.Element {

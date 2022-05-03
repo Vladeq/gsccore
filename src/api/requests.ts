@@ -1,4 +1,5 @@
 import {
+  BuySubscribeDto,
   SignInDto,
   SignUpDto,
   UpdatePasswordDto,
@@ -33,4 +34,8 @@ export function UpdatePasswordRequest({
 
 export function getSubscribesRequest() {
   return tokenInstance.get('/api/subscribe/self');
+}
+
+export function BuySubscribeRequest({ productId }: BuySubscribeDto) {
+  return tokenInstance.post('/api/payments/buy', { productId });
 }

@@ -40,6 +40,7 @@ export default function Home(): JSX.Element {
               return (
                 <LicenceBlock
                   key={product.id}
+                  id={product.id}
                   price={product.prices[0].price}
                   sites={product.name}
                 />

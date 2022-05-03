@@ -51,3 +51,6 @@ export interface Subscribe {
   status: string;
   codes: [Code];
 }
+export interface BuySubscribeDto {
+  productId: number;
+}
