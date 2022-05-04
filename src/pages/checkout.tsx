@@ -1,15 +1,19 @@
 import { GetServerSidePropsContext } from 'next';
-import { redirect } from 'next/dist/server/api-utils';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 import { getProductsRequest } from '../api/requests';
 import { Basket } from '../assets/svg-react';
+import { ErrorComponent } from '../components/error-component';
 import { HeadingH2 } from '../components/heading-h2';
-import { UiAnchor } from '../components/ui/ui-anchor';
+import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { StagePointer } from '../page-components/sign/stage-pointer';
 import { hrefs } from '../routes/client';
+import { RootState } from '../store';
+import { buySubscribeAct } from '../store/ducks/subscribes/subscribes-actions';
 import { Product } from '../types/api-types';
 
 interface CheckoutProps {
@@ -17,6 +21,17 @@ interface CheckoutProps {
 }
 
 export default function Checkout({ product }: CheckoutProps): JSX.Element {
+  const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state.subscribes);
+  console.log(state.error);
+  const router = useRouter();
+  const purchase = (id: number) => {
+    dispatch(buySubscribeAct({ priceId: id }));
+    router.push({
+      pathname: hrefs.success,
+      query: { name: product.name, price: product.prices[0].price },
+    });
+  };
   return (
     <MainLayout>
       <Heading>
@@ -45,6 +60,16 @@ export default function Checkout({ product }: CheckoutProps): JSX.Element {
           <TotalText>Total</TotalText>
           <TotalText>${product.prices[0].price}</TotalText>
         </TotalBlock>
+        <InfoBlock>
+          <StyledButton
+            buttonType="primary"
+            disabled={false}
+            value="Purchase"
+            isLoading={state.isLoading}
+            onClick={() => purchase(product.id)}
+          />
+          {!!state.isError && <ErrorComponent err={state.error.message} />}
+        </InfoBlock>
       </Heading>
     </MainLayout>
   );
@@ -198,5 +223,21 @@ const TotalText = styled.p`
     font-size: ${theme.sizes.normal}rem;
     font-weight: 700;
     line-height: 40px;
+  `}
+`;
+const InfoBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 35rem;
+`;
+
+const StyledButton = styled(UIButton)`
+  padding: 0.8rem;
+  width: 40%;
+  ${({ theme }) => css`
+    @media ${theme.devices.mobileL} {
+      width: 80%;
+    }
   `}
 `;

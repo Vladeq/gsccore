@@ -52,5 +52,5 @@ export interface Subscribe {
   codes: [Code];
 }
 export interface BuySubscribeDto {
-  productId: number;
+  priceId: number;
 }

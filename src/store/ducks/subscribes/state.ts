@@ -7,7 +7,7 @@ export interface subscribesState {
   subscribes: Record<number, Subscribe>;
 }
 export const initialState: subscribesState = {
-  isLoading: true,
+  isLoading: false,
   isError: false,
   error: null,
   subscribes: {},
