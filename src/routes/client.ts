@@ -6,4 +6,5 @@ export const hrefs = {
   setPersonalInfo: '/set-info',
   setPassword: '/set-password',
   subscriptions: '/my-subscriptions',
+  success: '/successful-purchase',
 };
