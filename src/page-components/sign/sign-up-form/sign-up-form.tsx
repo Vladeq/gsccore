@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
@@ -6,12 +7,14 @@ import { ErrorComponent } from '../../../components/error-component';
 import { FormInput } from '../../../components/form-components/form-input';
 import { patterns } from '../../../components/form-components/patterns';
 import { UIButton } from '../../../components/ui/ui-button';
+import { hrefs } from '../../../routes/client';
 import { RootState } from '../../../store';
 import { signUpAct } from '../../../store/ducks/user/user-actions';
 import { SignUpDto } from '../../../types/api-types';
 
 function SignUpForm(): JSX.Element {
   const dispatch = useDispatch();
+  const router = useRouter();
   const state = useSelector((state: RootState) => state.user);
 
   const { control, handleSubmit, formState } = useForm<SignUpDto>({
@@ -21,6 +24,9 @@ function SignUpForm(): JSX.Element {
 
   const onSubmit = (data: SignUpDto) => {
     dispatch(signUpAct(data));
+    if (!state.isError) {
+      router.push(hrefs.signin);
+    }
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +61,7 @@ function SignUpForm(): JSX.Element {
           },
         }}
         render={(fieldRender: UseControllerReturn) => (
-          <FormInput {...fieldRender} placeholder={'Enter password'} />
+          <FormInput {...fieldRender} type="password" placeholder={'Enter password'} />
         )}
       />
 

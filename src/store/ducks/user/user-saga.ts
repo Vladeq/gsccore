@@ -26,7 +26,6 @@ function* signUpWorker(action: PayloadAction<SignUpDto>) {
       username,
       password,
     });
-    yield put(addUser(responce.data));
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));
@@ -77,7 +76,6 @@ function* updatePasswordWorker(action: PayloadAction<UpdatePasswordDto>) {
       currentPassword,
       newPassword,
     });
-    console.log(responce.data);
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));

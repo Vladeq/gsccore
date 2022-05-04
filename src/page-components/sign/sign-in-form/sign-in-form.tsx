@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Controller, UseControllerReturn, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +15,6 @@ import { SignInDto } from '../../../types/api-types';
 function SignInForm(): JSX.Element {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { id } = router.query;
   const state = useSelector((state: RootState) => state.user);
 
   const { control, handleSubmit, formState } = useForm<SignInDto>({
@@ -26,6 +24,9 @@ function SignInForm(): JSX.Element {
 
   const onSubmit = (data: SignInDto) => {
     dispatch(signInAct(data));
+    if (!state.isError) {
+      router.push(hrefs.home);
+    }
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -52,19 +53,17 @@ function SignInForm(): JSX.Element {
           },
         }}
         render={(fieldRender: UseControllerReturn) => (
-          <FormInput {...fieldRender} placeholder={'Enter password'} />
+          <FormInput {...fieldRender} type="password" placeholder={'Enter password'} />
         )}
       />
       <InfoBlock>
-        <Link href={{ pathname: hrefs.checkout, query: { id } }}>
-          <StyledButton
-            buttonType="primary"
-            type="submit"
-            disabled={!formState.isValid}
-            value="Log in"
-            isLoading={state.isLoading}
-          />
-        </Link>
+        <StyledButton
+          buttonType="primary"
+          type="submit"
+          disabled={!formState.isValid}
+          value="Log in"
+          isLoading={state.isLoading}
+        />
 
         {!!state.isError && <ErrorComponent err={state.error.message} />}
       </InfoBlock>

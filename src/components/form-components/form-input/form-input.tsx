@@ -7,9 +7,10 @@ import { UIInput } from '../../ui/ui-input/index';
 
 interface FormInputProps extends UseControllerReturn {
   placeholder: string;
+  type?: string;
 }
 
-function FormInput({ placeholder, ...fieldRender }: FormInputProps): JSX.Element {
+function FormInput({ placeholder, type, ...fieldRender }: FormInputProps): JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
   const { field, fieldState } = fieldRender;
   const { error: hasError, isDirty: isDirty } = fieldState;
@@ -19,6 +20,7 @@ function FormInput({ placeholder, ...fieldRender }: FormInputProps): JSX.Element
         <UIInput
           {...field}
           {...fieldState}
+          type={type}
           placeholder={placeholder}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
