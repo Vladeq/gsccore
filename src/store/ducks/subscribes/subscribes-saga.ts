@@ -12,7 +12,7 @@ function* getSubscribesWorker() {
   try {
     const responce: AxiosResponse = yield call(getSubscribesRequest);
     yield put(renderSubscribes(responce.data));
-    // console.log(responce.data);
+    console.log(responce.data);
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));
