@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { ErrorComponent } from '../components/error-component';
 import { MainLayout } from '../layouts/main-layout';
 import { CodeBlock } from '../page-components/my-subscriptions/code-block';
+import { Codes } from '../page-components/my-subscriptions/codes';
 import { SubscriptionBlock } from '../page-components/my-subscriptions/subscription-block';
 import { SlideButtons } from '../page-components/slide-buttons';
 import { RootState } from '../store';
@@ -59,7 +60,7 @@ export default function MySubscriptions(): JSX.Element {
           </SwiperBlock>
         )}
       </Subscriptions>
-      <CodeBlock />
+      <Codes />
     </MainLayout>
   );
 }

@@ -1,4 +1,5 @@
 import {
+  ActivateCodeDto,
   BuySubscribeDto,
   SignInDto,
   SignUpDto,
@@ -42,4 +43,7 @@ export function BuySubscribeRequest({ priceId }: BuySubscribeDto) {
 
 export function getCodesRequest() {
   return tokenInstance.get('/api/code/self');
+}
+export function ActivateCodeRequest({ code }: ActivateCodeDto) {
+  return tokenInstance.post('/api/code/activate', { code });
 }

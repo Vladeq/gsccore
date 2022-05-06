@@ -5,7 +5,14 @@ import { UIButton } from '../../../components/ui/ui-button';
 import { UICheckbox } from '../../../components/ui/ui-checkbox';
 import { Status } from '../status';
 
-function CodeBlock(): JSX.Element {
+interface CodeProps {
+  code: string;
+  origin: string;
+  status: string;
+  pressActivate: (arg0: string) => void;
+}
+
+function CodeBlock({ code, origin, status, pressActivate }: CodeProps): JSX.Element {
   return (
     <Heading>
       <CheckBlock>
@@ -14,21 +21,29 @@ function CodeBlock(): JSX.Element {
       <LicenceBlock>
         <Title>Licence code</Title>
         <Field>
-          <FieldText>
-            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-          </FieldText>
+          <FieldText>{code}</FieldText>
           <Copy />
         </Field>
       </LicenceBlock>
       <DomainBlock>
         <Title>Domain</Title>
-        <Field>
-          <FieldText></FieldText>
-        </Field>
+        <Domain>
+          <Field>
+            <FieldText>{origin}</FieldText>
+          </Field>
+          {status === 'INACTIVE' ? (
+            <StyledButton
+              buttonType="secondary"
+              value="Activate"
+              isLoading={false}
+              onClick={() => pressActivate(code)}
+            />
+          ) : null}
+        </Domain>
       </DomainBlock>
       <StatusBlock>
         <Title>Status</Title>
-        <Status text="ACTIVE" />
+        <Status text={status} />
       </StatusBlock>
     </Heading>
   );
@@ -97,6 +112,16 @@ const Field = styled.div`
     border-radius: 6px;
     width: 100%;
     height: 50px;
+  `}
+`;
+const Domain = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const StyledButton = styled(UIButton)`
+  ${({ theme }) => css`
+    margin: 0 1rem 0 1rem;
+    padding: 0 0.5rem 0 0.5rem;
   `}
 `;
 const FieldText = styled.p`

@@ -18,6 +18,11 @@ export const codesReducer = createSlice({
         {},
       );
     },
+    activateCode(state, { payload: { id, status, origin } }) {
+      state.isError = false;
+      state.error = null;
+      state.codes[id] = { ...state.codes[id], status, origin };
+    },
     setError(state, action) {
       state.isError = true;
       state.error = action.payload;
@@ -28,4 +33,4 @@ export const codesReducer = createSlice({
   },
 });
 
-export const { renderCodes, setError, setLoading } = codesReducer.actions;
+export const { renderCodes, setError, setLoading, activateCode } = codesReducer.actions;

@@ -54,3 +54,6 @@ export interface Subscribe {
 export interface BuySubscribeDto {
   priceId: number;
 }
+export interface ActivateCodeDto {
+  code: string;
+}
