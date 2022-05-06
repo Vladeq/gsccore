@@ -71,7 +71,7 @@ const Blocks = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.colors.backgroundMain};
   ${({ theme }) => css`
-    @media ${theme.devices.laptop} {
+    @media ${theme.devices.tablet} {
       flex-direction: column;
     }
   `}

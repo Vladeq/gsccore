@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
 
 import { UIButton } from '../../../components/ui/ui-button';
@@ -10,6 +11,7 @@ interface blockProps {
   licence: string;
   validDate: number;
   price: string;
+  setId: Dispatch<SetStateAction<number>>;
 }
 
 function SubscriptionBlock({
@@ -19,7 +21,11 @@ function SubscriptionBlock({
   licence,
   validDate,
   price,
+  setId,
 }: blockProps): JSX.Element {
+  if (isActive) {
+    setId(id);
+  }
   return (
     <Heading $isActive={isActive}>
       <TitleBlock>
@@ -47,6 +53,13 @@ const Heading = styled.div<{ $isActive: boolean }>`
     width: 500px;
     margin: 2rem;
     opacity: ${$isActive ? `none` : `0.6`};
+    @media ${theme.devices.tabletXS} {
+      width: 400px;
+    }
+    @media ${theme.devices.mobileS} {
+      width: 200px;
+      margin: 0;
+    }
   `}
 `;
 const TitleBlock = styled.div`

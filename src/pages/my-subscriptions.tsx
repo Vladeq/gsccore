@@ -2,7 +2,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import styled, { css, ThemeContext } from 'styled-components';
@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { ErrorComponent } from '../components/error-component';
 import { MainLayout } from '../layouts/main-layout';
-import { CodeBlock } from '../page-components/my-subscriptions/code-block';
 import { Codes } from '../page-components/my-subscriptions/codes';
 import { SubscriptionBlock } from '../page-components/my-subscriptions/subscription-block';
 import { SlideButtons } from '../page-components/slide-buttons';
@@ -20,6 +19,8 @@ import { selectSubscribes } from '../store/ducks/subscribes/subscribes-selectors
 
 export default function MySubscriptions(): JSX.Element {
   const theme = useContext(ThemeContext);
+  const [activeId, setActiveId] = useState(0);
+  console.log(activeId);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubscribesAct());
@@ -37,7 +38,16 @@ export default function MySubscriptions(): JSX.Element {
         ) : state.isError ? (
           <ErrorComponent err={state.error.message} />
         ) : (
-          <SwiperBlock slidesPerView={3} centeredSlides={true} setWrapperSize={true}>
+          <SwiperBlock
+            slidesPerView={1}
+            centeredSlides={true}
+            centeredSlidesBounds={true}
+            setWrapperSize={true}
+            breakpoints={{
+              1024: { slidesPerView: 2, centeredSlidesBounds: false },
+              1280: { slidesPerView: 3, centeredSlidesBounds: false, spaceBetween: 40 },
+            }}
+          >
             <>
               {subscribes.map((subscribe) => {
                 return (
@@ -50,6 +60,7 @@ export default function MySubscriptions(): JSX.Element {
                         licence={subscribe.product.name}
                         validDate={subscribe.currentPeriodEnd}
                         price={subscribe.product.prices[0].price}
+                        setId={setActiveId}
                       />
                     )}
                   </SwiperSlide>
@@ -74,9 +85,14 @@ const Subscriptions = styled.div`
   `}
 `;
 const SwiperBlock = styled(Swiper)`
-  width: calc(500px * 4);
-  height: 100%;
-  margin: 0;
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    @media ${theme.devices.laptop} {
+      width: 100%;
+    }
+  `}
 `;
 const loader = css`
   margin: 2rem;

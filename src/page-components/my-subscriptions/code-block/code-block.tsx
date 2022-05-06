@@ -42,7 +42,7 @@ function CodeBlock({ code, origin, status, pressActivate }: CodeProps): JSX.Elem
         </Domain>
       </DomainBlock>
       <StatusBlock>
-        <Title>Status</Title>
+        <StatusTitle>Status</StatusTitle>
         <Status text={status} />
       </StatusBlock>
     </Heading>
@@ -57,8 +57,11 @@ const Heading = styled.div`
     flex-wrap: nowrap;
     background: ${theme.colors.backgroundBlock};
     border-radius: 12px;
-    width: 80;
     margin: 2rem;
+    @media ${theme.devices.tablet} {
+      flex-direction: column;
+      position: relative;
+    }
   `}
 `;
 const CheckBlock = styled.div`
@@ -67,6 +70,11 @@ const CheckBlock = styled.div`
     justify-content: center;
     align-items: center;
     width: 5%;
+    @media ${theme.devices.tablet} {
+      position: absolute;
+      left: 10%;
+      top: 10%;
+    }
   `}
 `;
 const LicenceBlock = styled.div`
@@ -75,6 +83,10 @@ const LicenceBlock = styled.div`
     flex-direction: column;
     width: 40%;
     margin: 1rem;
+    @media ${theme.devices.tablet} {
+      width: 90%;
+      margin-top: 20%;
+    }
   `}
 `;
 const DomainBlock = styled.div`
@@ -83,6 +95,9 @@ const DomainBlock = styled.div`
     flex-direction: column;
     width: 45%;
     margin: 1rem;
+    @media ${theme.devices.tablet} {
+      width: 90%;
+    }
   `}
 `;
 const StatusBlock = styled.div`
@@ -91,6 +106,11 @@ const StatusBlock = styled.div`
     flex-direction: column;
     width: 5%;
     margin: 1rem;
+    @media ${theme.devices.tablet} {
+      position: absolute;
+      left: 20%;
+      top: 0;
+    }
   `}
 `;
 const Title = styled.p`
@@ -100,6 +120,18 @@ const Title = styled.p`
     font-weight: 700;
     line-height: 18px;
     margin-top: 0.5rem;
+  `}
+`;
+const StatusTitle = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.filled};
+    font-size: ${theme.sizes.extraSmall}rem;
+    font-weight: 700;
+    line-height: 18px;
+    margin-top: 0.5rem;
+    @media ${theme.devices.tablet} {
+      display: none;
+    }
   `}
 `;
 const Field = styled.div`

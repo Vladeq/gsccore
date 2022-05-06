@@ -1,16 +1,19 @@
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { Logo } from '../../assets/svg-react/index';
+import { hrefs } from '../../routes/client';
 
 interface HeaderProps {
   headerRight?: ReactNode;
 }
 
 function Header({ headerRight }: HeaderProps): JSX.Element {
+  const router = useRouter();
   return (
     <Heading>
-      <Logo />
+      <Logo onClick={() => router.push(hrefs.home)} />
       {headerRight}
     </Heading>
   );
