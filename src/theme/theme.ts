@@ -14,9 +14,9 @@ export const theme = {
     filled: '#969696',
     error: '#FF5A65',
     status: {
-      Active: '#05C168',
-      Inactive: '#FF5A65',
-      Hold: '#FF9E2C',
+      ACTIVE: '#05C168',
+      INACTIVE: '#FF5A65',
+      HOLD: '#FF9E2C',
     },
     active: {
       primary: '#FC5842',

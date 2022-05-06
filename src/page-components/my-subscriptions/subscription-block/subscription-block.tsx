@@ -3,33 +3,50 @@ import styled, { css } from 'styled-components';
 import { UIButton } from '../../../components/ui/ui-button';
 import { Status } from '../status/index';
 
-function SubscriptionBlock(): JSX.Element {
+interface blockProps {
+  isActive: boolean;
+  id: number;
+  status: string;
+  licence: string;
+  validDate: number;
+  price: string;
+}
+
+function SubscriptionBlock({
+  isActive,
+  id,
+  status,
+  licence,
+  validDate,
+  price,
+}: blockProps): JSX.Element {
   return (
-    <Heading>
+    <Heading $isActive={isActive}>
       <TitleBlock>
         <TitleText>GScore</TitleText>
-        <Status text="Active" />
+        <Status text={status} />
       </TitleBlock>
       <LicenceBlock>
         <LicenceInfo>
-          <LicenceText>Single site license</LicenceText>
-          <LicenceValid>valid until 21.10.2022</LicenceValid>
+          <LicenceText>{licence}</LicenceText>
+          <LicenceValid>valid until {validDate}</LicenceValid>
         </LicenceInfo>
-        <LicencePrice>$77</LicencePrice>
+        <LicencePrice>${price}</LicencePrice>
       </LicenceBlock>
       <StyledButton buttonType="secondary" value="View" isLoading={false} />
     </Heading>
   );
 }
 
-const Heading = styled.div`
-  ${({ theme }) => css`
+const Heading = styled.div<{ $isActive: boolean }>`
+  ${({ theme, $isActive }) => css`
     display: flex;
     flex-direction: column;
     background: ${theme.colors.backgroundBlock};
     border-radius: 12px;
-    width: 600px;
+    width: 500px;
     margin: 2rem;
+    opacity: ${$isActive ? `none` : `0.6`};
   `}
 `;
 const TitleBlock = styled.div`
