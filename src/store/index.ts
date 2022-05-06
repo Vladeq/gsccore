@@ -14,6 +14,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import { codesReducer } from './ducks/codes/codes-reducer';
+import { codesWatcher } from './ducks/codes/codes-saga';
 import { productsReducer } from './ducks/products/products-reducer';
 import { productsWatcher } from './ducks/products/products-saga';
 import { subscribesReducer } from './ducks/subscribes/subscribes-reducer';
@@ -24,7 +26,7 @@ import { userWatcher } from './ducks/user/user-saga';
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
-  yield all([userWatcher(), productsWatcher(), subscribesWatcher()]);
+  yield all([userWatcher(), productsWatcher(), subscribesWatcher(), codesWatcher()]);
 }
 
 const persistConfig = {
@@ -37,6 +39,7 @@ const rootReducer = combineReducers({
   user: persistedReducer,
   products: productsReducer.reducer,
   subscribes: subscribesReducer.reducer,
+  codes: codesReducer.reducer,
 });
 
 export const store = configureStore({

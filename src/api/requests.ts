@@ -39,3 +39,7 @@ export function getSubscribesRequest() {
 export function BuySubscribeRequest({ priceId }: BuySubscribeDto) {
   return tokenInstance.post('/api/payments/buy', { priceId });
 }
+
+export function getCodesRequest() {
+  return tokenInstance.get('/api/code/self');
+}
