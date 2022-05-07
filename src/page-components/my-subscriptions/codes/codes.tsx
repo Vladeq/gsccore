@@ -26,7 +26,7 @@ function Codes(): JSX.Element {
         <ClipLoader loading={true} size={150} color={theme.colors.error} css={loader} />
       ) : state.isError ? (
         <ErrorComponent err={state.error.message} />
-      ) : (
+      ) : codes.length !== 0 ? (
         <>
           {codes.map((code) => {
             return (
@@ -40,7 +40,7 @@ function Codes(): JSX.Element {
             );
           })}
         </>
-      )}
+      ) : null}
     </Heading>
   );
 }

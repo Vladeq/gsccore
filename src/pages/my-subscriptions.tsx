@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { ErrorComponent } from '../components/error-component';
 import { MainLayout } from '../layouts/main-layout';
 import { Codes } from '../page-components/my-subscriptions/codes';
+import { EmptySubscriptions } from '../page-components/my-subscriptions/empty-subscriptions';
 import { SubscriptionBlock } from '../page-components/my-subscriptions/subscription-block';
 import { SlideButtons } from '../page-components/slide-buttons';
 import { RootState } from '../store';
@@ -37,6 +38,8 @@ export default function MySubscriptions(): JSX.Element {
           <ClipLoader loading={true} size={150} color={theme.colors.error} css={loader} />
         ) : state.isError ? (
           <ErrorComponent err={state.error.message} />
+        ) : subscribes.length == 0 ? (
+          <EmptySubscriptions />
         ) : (
           <SwiperBlock
             slidesPerView={1}
