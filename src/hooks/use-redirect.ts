@@ -1,15 +1,19 @@
-import Router from 'next/router';
-import { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../store';
+import { setLoading } from '../store/ducks/user/user-reducer';
 import { hrefs } from '../routes/client';
 
 export default function useRedirect(isAuth: boolean): { isLoading: boolean } {
-  const [isLoading, setLoading] = useState(false);
+  const router = useRouter()
+  const state = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (isAuth) {
-      Router.push(hrefs.home);
-      setLoading(true);
+    if (state.isAuth) {
+      router.push(hrefs.home);
+      dispatch(setLoading(true))
     }
-  }, [isLoading]);
-  return { isLoading };
+  }, [state]);
+  return { isLoading: state.isLoading };
 }

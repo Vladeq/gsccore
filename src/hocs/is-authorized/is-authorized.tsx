@@ -9,8 +9,7 @@ import { RootState } from '../../store';
 function IsAutorized<T>(Child: ComponentType<T>): ComponentType<T> {
   return function (props: T): JSX.Element {
     const theme = useContext(ThemeContext);
-    const state = useSelector((state: RootState) => state.user);
-    const { isLoading } = useRedirect(state.isAuth);
+    const { isLoading } = useRedirect();
     if (isLoading) {
       return (
         <ClipLoader loading={true} size={150} color={theme.colors.error} css={loader} />

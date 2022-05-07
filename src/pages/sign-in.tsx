@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { HeadingH2 } from '../components/heading-h2';
-import { IsAuthorized } from '../HOC/isAuthorized';
+import { IsAuthorized } from '../hocs/is-authorized';
 import { MainLayout } from '../layouts/main-layout';
 import { SignInForm } from '../page-components/sign/sign-in-form';
 import { StagePointer } from '../page-components/sign/stage-pointer';

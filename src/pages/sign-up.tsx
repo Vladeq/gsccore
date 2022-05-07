@@ -4,8 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { HeadingH2 } from '../components/heading-h2';
 import { UiAnchor } from '../components/ui/ui-anchor';
-import { IsAuthorized } from '../HOC/isAuthorized';
-import { useRedirect } from '../hooks/use-redirect';
+import { IsAuthorized } from '../hocs/is-authorized';
 import { MainLayout } from '../layouts/main-layout';
 import { SignUpForm } from '../page-components/sign/sign-up-form';
 import { StagePointer } from '../page-components/sign/stage-pointer';
