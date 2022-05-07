@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { AnchorHTMLAttributes } from 'react';
+import { AnchorHTMLAttributes, forwardRef, ForwardRefRenderFunction } from 'react';
 import styled, { css, CSSProp } from 'styled-components';
 
 import { UIComponentsVariant } from '../../../types/button-types';
@@ -9,13 +9,11 @@ interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string;
   rootCSS?: CSSProp;
 }
-function UiAnchor({
-  anchorType,
-  className,
-  rootCSS,
-  href,
-  ...anchorProps
-}: AnchorProps): JSX.Element {
+
+const UiAnchor: ForwardRefRenderFunction<HTMLAnchorElement, AnchorProps> = (
+  { anchorType, className, rootCSS, href, ...anchorProps },
+  ref,
+) => {
   const router = useRouter();
   const isActive = router.asPath === href;
   return (
@@ -25,9 +23,10 @@ function UiAnchor({
       className={className}
       $CSS={rootCSS}
       {...anchorProps}
+      ref={ref}
     />
   );
-}
+};
 
 const A = styled.a<{ $isActive: boolean; $CSS?: CSSProp; $anchorType: string }>`
   ${({ $isActive, $CSS, theme, $anchorType }) => css`
@@ -46,4 +45,4 @@ const A = styled.a<{ $isActive: boolean; $CSS?: CSSProp; $anchorType: string }>`
   `};
 `;
 
-export default UiAnchor;
+export default forwardRef<HTMLAnchorElement, AnchorProps>(UiAnchor);

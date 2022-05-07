@@ -4,12 +4,14 @@ import styled, { css } from 'styled-components';
 
 import { HeadingH2 } from '../components/heading-h2';
 import { UiAnchor } from '../components/ui/ui-anchor';
+import { IsAuthorized } from '../HOC/isAuthorized';
+import { useRedirect } from '../hooks/use-redirect';
 import { MainLayout } from '../layouts/main-layout';
 import { SignUpForm } from '../page-components/sign/sign-up-form';
 import { StagePointer } from '../page-components/sign/stage-pointer';
 import { hrefs } from '../routes/client';
 
-export default function SignUp(): JSX.Element {
+function SignUp(): JSX.Element {
   const router = useRouter();
   const { id } = router.query;
   return (
@@ -38,6 +40,7 @@ export default function SignUp(): JSX.Element {
     </MainLayout>
   );
 }
+
 const Pointer = styled(StagePointer)`
   margin: 1rem 0rem 1rem 0rem;
   width: 10rem;
@@ -122,3 +125,4 @@ const DirectText = styled.p`
     padding-right: 0.2rem;
   `}
 `;
+export default IsAuthorized(SignUp);

@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 
 import { HeadingH2 } from '../components/heading-h2';
+import { IsAuthorized } from '../HOC/isAuthorized';
 import { MainLayout } from '../layouts/main-layout';
 import { SignInForm } from '../page-components/sign/sign-in-form';
 import { StagePointer } from '../page-components/sign/stage-pointer';
 import { hrefs } from '../routes/client';
 
-export default function SignUp(): JSX.Element {
+function SignIn(): JSX.Element {
   return (
     <MainLayout>
       <Heading>
@@ -74,3 +75,4 @@ const TitleBlock = styled.div`
     }
   `}
 `;
+export default IsAuthorized(SignIn);
