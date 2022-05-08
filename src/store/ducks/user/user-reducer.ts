@@ -11,6 +11,7 @@ export const userReducer = createSlice({
       state.email = action.payload.user.email;
       state.username = action.payload.user.username;
       state.token = action.payload.token;
+      state.isAuth = true;
       state.isError = false;
       state.error = null;
     },
@@ -19,6 +20,7 @@ export const userReducer = createSlice({
       state.email = '';
       state.username = '';
       state.token = '';
+      state.isAuth = false;
       state.isError = false;
       state.error = null;
       state.isLoading = false;
@@ -29,6 +31,7 @@ export const userReducer = createSlice({
     },
     setError(state, action) {
       state.isError = true;
+      state.isAuth = false;
       state.error = action.payload;
     },
     setLoading(state, action) {
