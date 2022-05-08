@@ -57,3 +57,11 @@ export interface BuySubscribeDto {
 export interface ActivateCodeDto {
   code: string;
 }
+export interface ChangeSubsribeDto {
+  productId: number;
+  subscribeId: number;
+}
+export interface ManageCodesDto {
+  codesIds: [];
+  subscribeId: number;
+}

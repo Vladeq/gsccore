@@ -1,6 +1,8 @@
 import {
   ActivateCodeDto,
   BuySubscribeDto,
+  ChangeSubsribeDto,
+  ManageCodesDto,
   SignInDto,
   SignUpDto,
   UpdatePasswordDto,
@@ -46,4 +48,10 @@ export function getCodesRequest() {
 }
 export function ActivateCodeRequest({ code }: ActivateCodeDto) {
   return tokenInstance.post('/api/code/activate', { code });
+}
+export function ChangeSubscribeRequest({ productId, subscribeId }: ChangeSubsribeDto) {
+  return tokenInstance.post('/api/subscribe/change-product', { productId, subscribeId });
+}
+export function ManageCodesRequest({ codesIds, subscribeId }: ManageCodesDto) {
+  return tokenInstance.put('/api/code/manage', { codesIds, subscribeId });
 }

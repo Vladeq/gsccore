@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -75,6 +74,7 @@ const DropDown = styled.div`
   position: absolute;
   top: 5rem;
   right: 2rem;
+  z-index: 10;
   background: ${({ theme }) => theme.colors.backgroundBlock};
   display: flex;
   flex-direction: column;
