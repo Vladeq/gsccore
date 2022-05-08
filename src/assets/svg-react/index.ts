@@ -14,3 +14,4 @@ export { default as Logo } from './logo';
 export { default as Twitter } from './twitter';
 export { default as VectorDown } from './vector-down';
 export { default as VectorUp } from './vector-up';
+export { default as Checkbox } from './checkbox';

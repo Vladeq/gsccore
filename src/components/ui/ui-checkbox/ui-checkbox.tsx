@@ -1,6 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import styled, { css, CSSProp } from 'styled-components';
 
+import { Checkbox } from '../../../assets/svg-react';
+
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   rootCSS?: CSSProp;
@@ -22,7 +24,9 @@ function UICheckbox({
         onChange={onChange}
         {...checkboxProps}
       />
-      <Checkbox $checked={checked} />
+      <CheckboxBlock $checked={checked}>
+        <Icon $checked={checked} viewBox="0 0 18 18" />
+      </CheckboxBlock>
     </Heading>
   );
 }
@@ -46,7 +50,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   white-space: nowrap;
   width: 1px;
 `;
-const Checkbox = styled.div<{ $checked?: boolean }>`
+const CheckboxBlock = styled.div<{ $checked?: boolean }>`
   ${({ theme, $checked }) => css`
     display: inline-block;
     width: 24px;
@@ -56,7 +60,18 @@ const Checkbox = styled.div<{ $checked?: boolean }>`
       : theme.colors.textPrimary};
     border-radius: 8px;
     transition: all 150ms;
+    &:hover {
+      background: ${$checked ? theme.colors.hoverButton : theme.colors.textSecondary};
+    }
+    &:focus {
+      border: 4px solid
+        ${$checked ? theme.colors.hoverButton : theme.colors.textSecondary};
+    }
   `};
 `;
-
+const Icon = styled(Checkbox)<{ $checked?: boolean }>`
+  ${({ theme, $checked }) => css`
+    visibility: ${$checked ? 'visible' : 'hidden'};
+  `}
+`;
 export default UICheckbox;
