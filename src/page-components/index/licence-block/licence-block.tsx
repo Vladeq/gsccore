@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 import { Checked } from '../../../assets/svg-react/index';
 import { hrefs } from '../../../routes/client';
 import { RootState } from '../../../store';
+import { ChangeSubsribeAct } from '../../../store/ducks/subscribes/subscribes-actions';
+import { ChangeSubsribeDto } from '../../../types/api-types';
 
 interface LicenceBlockProps {
   id: number;
@@ -12,7 +15,19 @@ interface LicenceBlockProps {
   sites: string;
 }
 function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
+  const dispatch = useDispatch();
   const { username } = useSelector((state: RootState) => state.user);
+  const router = useRouter();
+  const { activeId } = router.query;
+  console.log(activeId);
+  const changeSubscription = (subscribeId: number, productId: number) => {
+    if (subscribeId) {
+      dispatch(ChangeSubsribeAct({ subscribeId, productId }));
+      router.push(hrefs.subscriptions);
+    } else {
+      return null;
+    }
+  };
   return (
     <Heading>
       <BlockInfo>
@@ -40,13 +55,15 @@ function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
       <LinkBlock>
         <Link
           href={
-            username
+            username && !activeId
               ? { pathname: hrefs.checkout, query: { id } }
               : { pathname: hrefs.signup, query: { id } }
           }
           passHref={true}
         >
-          <LinkText>Get Gscore</LinkText>
+          <LinkText onClick={() => changeSubscription(Number(activeId), id)}>
+            Get Gscore
+          </LinkText>
         </Link>
       </LinkBlock>
     </Heading>

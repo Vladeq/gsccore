@@ -2,8 +2,12 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import { BuySubscribeRequest, getSubscribesRequest } from '../../../api/requests';
-import { BuySubscribeDto } from '../../../types/api-types';
+import {
+  BuySubscribeRequest,
+  ChangeSubscribeRequest,
+  getSubscribesRequest,
+} from '../../../api/requests';
+import { BuySubscribeDto, ChangeSubsribeDto } from '../../../types/api-types';
 import { SubscribesActionKinds } from './subscribes-action-kinds';
 import { renderSubscribes, setError, setLoading } from './subscribes-reducer';
 
@@ -35,10 +39,25 @@ function* buySubscribeWorker(action: PayloadAction<BuySubscribeDto>) {
     yield put(setLoading(false));
   }
 }
+function* changeSubscribeWorker(action: PayloadAction<ChangeSubsribeDto>) {
+  const { productId, subscribeId } = action.payload;
+  try {
+    const responce: AxiosResponse = yield call(ChangeSubscribeRequest, {
+      productId,
+      subscribeId,
+    });
+    console.log(responce.data);
+  } catch (err) {
+    if (err instanceof Error) {
+      yield put(setError(err));
+    }
+  }
+}
 
 export function* subscribesWatcher() {
   yield all([
     takeLatest(SubscribesActionKinds.getSubscribes, getSubscribesWorker),
     takeLatest(SubscribesActionKinds.buySubscribe, buySubscribeWorker),
+    takeLatest(SubscribesActionKinds.changeSubscribe, changeSubscribeWorker),
   ]);
 }
