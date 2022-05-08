@@ -11,24 +11,51 @@ function UICheckbox({
   rootCSS,
   type,
   checked,
+  onChange,
   ...checkboxProps
 }: CheckboxProps): JSX.Element {
   return (
-    <Checkbox
-      className={className}
-      $CSS={rootCSS}
-      type="checkbox"
-      checked={checked}
-      {...checkboxProps}
-    />
+    <Heading className={className} $CSS={rootCSS}>
+      <HiddenCheckbox
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        {...checkboxProps}
+      />
+      <Checkbox $checked={checked} />
+    </Heading>
   );
 }
 
-const Checkbox = styled.input<{ $CSS?: CSSProp }>`
+const Heading = styled.div<{ $CSS?: CSSProp }>`
   ${({ $CSS, theme }) => css`
+    display: inline-block;
+    vertical-align: middle;
+    ${$CSS};
+  `}
+`;
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+  border: 0;
+  clip: rect(0 0 0 0);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+`;
+const Checkbox = styled.div<{ $checked?: boolean }>`
+  ${({ theme, $checked }) => css`
+    display: inline-block;
     width: 24px;
     height: 24px;
-    ${$CSS};
+    background: ${$checked
+      ? theme.colors.backgroundActiveElem
+      : theme.colors.textPrimary};
+    border-radius: 8px;
+    transition: all 150ms;
   `};
 `;
 

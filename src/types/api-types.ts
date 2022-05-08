@@ -40,6 +40,7 @@ export interface Code {
   status: string;
   subscribeId: number;
   userId: string;
+  isChecked: boolean;
 }
 export interface Subscribe {
   id: number;
@@ -62,6 +63,6 @@ export interface ChangeSubsribeDto {
   subscribeId: number;
 }
 export interface ManageCodesDto {
-  codesIds: [];
+  codesIds: number[];
   subscribeId: number;
 }

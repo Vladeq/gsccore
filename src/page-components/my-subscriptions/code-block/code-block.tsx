@@ -1,22 +1,34 @@
+import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 import { Copy } from '../../../assets/svg-react';
 import { UIButton } from '../../../components/ui/ui-button';
 import { UICheckbox } from '../../../components/ui/ui-checkbox';
+import { setChecked } from '../../../store/ducks/codes/codes-reducer';
 import { Status } from '../status';
 
 interface CodeProps {
+  id: number;
   code: string;
   origin: string;
   status: string;
+  isChecked: boolean;
   pressActivate: (arg0: string) => void;
 }
 
-function CodeBlock({ code, origin, status, pressActivate }: CodeProps): JSX.Element {
+function CodeBlock({
+  id,
+  code,
+  origin,
+  status,
+  isChecked,
+  pressActivate,
+}: CodeProps): JSX.Element {
+  const dispatch = useDispatch();
   return (
     <Heading>
-      <CheckBlock>
-        <UICheckbox />
+      <CheckBlock onClick={() => dispatch(setChecked({ id }))}>
+        <UICheckbox checked={isChecked} />
       </CheckBlock>
       <LicenceBlock>
         <Title>Licence code</Title>

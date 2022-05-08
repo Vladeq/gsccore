@@ -25,7 +25,6 @@ export default function MySubscriptions(): JSX.Element {
   const router = useRouter();
   const theme = useContext(ThemeContext);
   const [activeId, setActiveId] = useState(0);
-  console.log(activeId);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubscribesAct());

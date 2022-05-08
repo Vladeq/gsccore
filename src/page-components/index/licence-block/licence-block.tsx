@@ -7,7 +7,6 @@ import { Checked } from '../../../assets/svg-react/index';
 import { hrefs } from '../../../routes/client';
 import { RootState } from '../../../store';
 import { ChangeSubsribeAct } from '../../../store/ducks/subscribes/subscribes-actions';
-import { ChangeSubsribeDto } from '../../../types/api-types';
 
 interface LicenceBlockProps {
   id: number;
@@ -55,7 +54,9 @@ function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
       <LinkBlock>
         <Link
           href={
-            username && !activeId
+            activeId
+              ? { pathname: hrefs.subscriptions }
+              : username
               ? { pathname: hrefs.checkout, query: { id } }
               : { pathname: hrefs.signup, query: { id } }
           }
