@@ -1,9 +1,10 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { store } from '../store';
+import { persistor, store } from '../store';
 import { theme } from '../theme/theme';
 
 export default function GscoreApp({ Component, pageProps }: AppProps): JSX.Element {
@@ -22,9 +23,11 @@ export default function GscoreApp({ Component, pageProps }: AppProps): JSX.Eleme
       </Head>
       <GlobalStyle />
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </PersistGate>
       </Provider>
     </>
   );
