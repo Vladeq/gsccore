@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, useContext } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
-import styled, { css, CSSProp, ThemeContext } from 'styled-components';
+import { ButtonHTMLAttributes } from 'react';
+import styled, { css, CSSProp } from 'styled-components';
 
+import { Refresh } from '../../../assets/svg-react';
 import { UIComponentsVariant } from '../../../types/button-types';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,8 +19,6 @@ function UIButton({
   value,
   ...buttonProps
 }: ButtonProps): JSX.Element {
-  const theme = useContext(ThemeContext);
-
   return (
     <Button
       $buttonType={buttonType}
@@ -28,11 +26,7 @@ function UIButton({
       $CSS={rootCSS}
       {...buttonProps}
     >
-      {isLoading ? (
-        <ClipLoader loading={true} size={20} color={theme.colors[buttonType].text} />
-      ) : (
-        value
-      )}
+      {isLoading ? <Refresh /> : value}
     </Button>
   );
 }

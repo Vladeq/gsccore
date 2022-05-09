@@ -1,8 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ClipLoader from 'react-spinners/ClipLoader';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
+import { Refresh } from '../assets/svg-react';
 import { ErrorComponent } from '../components/error-component/index';
 import { HeadingH2 } from '../components/heading-h2';
 import { MainLayout } from '../layouts/main-layout';
@@ -12,7 +12,6 @@ import { getProductsAct } from '../store/ducks/products/products-actions';
 import { selectProduct } from '../store/ducks/products/products-selectors';
 
 export default function Home(): JSX.Element {
-  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductsAct());
@@ -27,12 +26,7 @@ export default function Home(): JSX.Element {
         </TitleBlock>
         <Blocks>
           {state.isLoading ? (
-            <ClipLoader
-              loading={true}
-              size={150}
-              color={theme.colors.error}
-              css={loader}
-            />
+            <Refresh />
           ) : state.isError ? (
             <ErrorComponent err={state.error.message} />
           ) : (
@@ -75,9 +69,6 @@ const Blocks = styled.div`
       flex-direction: column;
     }
   `}
-`;
-const loader = css`
-  margin: 2rem;
 `;
 const TitleBlock = styled.div`
   display: flex;

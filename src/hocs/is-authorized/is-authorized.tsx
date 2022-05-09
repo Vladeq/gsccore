@@ -1,25 +1,17 @@
-import { ComponentType, useContext } from 'react';
-import { ClipLoader } from 'react-spinners';
-import { css, ThemeContext } from 'styled-components';
+import { ComponentType } from 'react';
 
+import { Refresh } from '../../assets/svg-react';
 import useRedirect from '../../hooks/use-redirect';
 
 function IsAutorized<T>(Child: ComponentType<T>): ComponentType<T> {
   return function Auth(props: T): JSX.Element {
-    const theme = useContext(ThemeContext);
     const { isLoading } = useRedirect();
     if (isLoading) {
-      return (
-        <ClipLoader loading={true} size={150} color={theme.colors.error} css={loader} />
-      );
+      return <Refresh />;
     } else {
       return <Child {...props} />;
     }
   };
 }
-
-const loader = css`
-  margin: 2rem;
-`;
 
 export default IsAutorized;

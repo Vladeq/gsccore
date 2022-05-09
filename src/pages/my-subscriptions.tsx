@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ClipLoader } from 'react-spinners';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
+import { Refresh } from '../assets/svg-react';
 import { ErrorComponent } from '../components/error-component';
 import { MainLayout } from '../layouts/main-layout';
 import { Codes } from '../page-components/my-subscriptions/codes';
@@ -13,7 +13,6 @@ import { getSubscribesAct } from '../store/ducks/subscribes/subscribes-actions';
 import { selectSubscribes } from '../store/ducks/subscribes/subscribes-selectors';
 
 export default function MySubscriptions(): JSX.Element {
-  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSubscribesAct());
@@ -25,18 +24,22 @@ export default function MySubscriptions(): JSX.Element {
 
   return (
     <MainLayout>
-      <Subscriptions>
-        {state.isLoading ? (
-          <ClipLoader loading={true} size={150} color={theme.colors.error} css={loader} />
-        ) : state.isError ? (
-          <ErrorComponent err={state.error.message} />
-        ) : subscribes.length == 0 ? (
-          <EmptySubscriptions />
-        ) : (
-          <SwiperComponent />
-        )}
-      </Subscriptions>
-      <Codes />
+      <>
+        <Subscriptions>
+          {state.isLoading ? (
+            <Loader>
+              <Refresh />
+            </Loader>
+          ) : state.isError ? (
+            <ErrorComponent err={state.error.message} />
+          ) : subscribes.length == 0 ? (
+            <EmptySubscriptions />
+          ) : (
+            <SwiperComponent />
+          )}
+        </Subscriptions>
+        <Codes />
+      </>
     </MainLayout>
   );
 }
@@ -49,6 +52,9 @@ const Subscriptions = styled.div`
     width: 100%;
   `}
 `;
-const loader = css`
-  margin: 2rem;
+const Loader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

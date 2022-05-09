@@ -19,4 +19,3 @@ export { default as Checkbox } from './checkbox';
 export { default as GreyGear } from './grey-gear';
 export { default as WhiteClose } from './white-close';
 export { default as GreyFrame } from './grey-frame';
-export { default as Refresh } from './Refresh';

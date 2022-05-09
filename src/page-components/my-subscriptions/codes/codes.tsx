@@ -1,8 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ClipLoader } from 'react-spinners';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
+import { Refresh } from '../../../assets/svg-react';
 import { ErrorComponent } from '../../../components/error-component/index';
 import { UIButton } from '../../../components/ui/ui-button';
 import {
@@ -18,7 +18,6 @@ import { RootState } from '../../../store/index';
 import { CodeBlock } from '../code-block/index';
 
 function Codes(): JSX.Element {
-  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCodesAct());
@@ -32,7 +31,9 @@ function Codes(): JSX.Element {
   return (
     <Heading>
       {state.isLoading ? (
-        <ClipLoader loading={true} size={150} color={theme.colors.error} css={loader} />
+        <Loader>
+          <Refresh />
+        </Loader>
       ) : state.isError ? (
         <ErrorComponent err={state.error.message} />
       ) : codes.length !== 0 ? (
@@ -107,7 +108,10 @@ const StyledButton = styled(UIButton)`
     }
   `}
 `;
-const loader = css`
-  margin: 2rem;
+const Loader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 export default Codes;
