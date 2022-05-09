@@ -1,13 +1,11 @@
 import { ComponentType, useContext } from 'react';
-import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import { css, ThemeContext } from 'styled-components';
 
 import useRedirect from '../../hooks/use-redirect';
-import { RootState } from '../../store';
 
 function IsAutorized<T>(Child: ComponentType<T>): ComponentType<T> {
-  return function (props: T): JSX.Element {
+  return function Auth(props: T): JSX.Element {
     const theme = useContext(ThemeContext);
     const { isLoading } = useRedirect();
     if (isLoading) {
