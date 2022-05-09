@@ -18,7 +18,6 @@ function UICheckbox({
   ...checkboxProps
 }: CheckboxProps): JSX.Element {
   const [isFocus, setFocus] = useState(false);
-  console.log(isFocus);
   return (
     <Heading className={className} $CSS={rootCSS}>
       <HiddenCheckbox

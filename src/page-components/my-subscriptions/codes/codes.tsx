@@ -78,7 +78,8 @@ const Heading = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 100%;
+    max-width: 100%;
+    margin: 0 1rem 0 1rem;
   `}
 `;
 const KeepButtonBlock = styled.div`

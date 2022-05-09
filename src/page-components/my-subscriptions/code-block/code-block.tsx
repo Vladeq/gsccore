@@ -1,3 +1,4 @@
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 
@@ -32,17 +33,21 @@ function CodeBlock({
       </CheckBlock>
       <LicenceBlock>
         <Title>Licence code</Title>
-        <Field>
-          <FieldText>{code}</FieldText>
-          <Copy />
-        </Field>
+        <CopyToClipboard text={code}>
+          <Field>
+            <FieldText>{code}</FieldText>
+            <CopyButton>
+              <Copy />
+            </CopyButton>
+          </Field>
+        </CopyToClipboard>
       </LicenceBlock>
       <DomainBlock>
         <Title>Domain</Title>
         <Domain>
-          <Field>
+          <DomainField>
             <FieldText>{origin}</FieldText>
-          </Field>
+          </DomainField>
           {status === 'INACTIVE' ? (
             <StyledButton
               buttonType="secondary"
@@ -75,6 +80,10 @@ const Heading = styled.div`
       position: relative;
     }
   `}
+`;
+const CopyButton = styled.button`
+  background: none;
+  border: none;
 `;
 const CheckBlock = styled.div`
   ${({ theme }) => css`
@@ -152,6 +161,7 @@ const Field = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: nowrap;
     background: ${theme.colors.neutral};
@@ -160,9 +170,23 @@ const Field = styled.div`
     height: 50px;
   `}
 `;
+const DomainField = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    background: ${theme.colors.neutral};
+    border-radius: 6px;
+    padding: 0 10px 0 10px;
+    width: 100%;
+    height: 50px;
+  `}
+`;
 const Domain = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
 `;
 const StyledButton = styled(UIButton)`
   ${({ theme }) => css`
@@ -186,7 +210,7 @@ const FieldText = styled.p`
     text-overflow: ellipsis;
     white-space: nowrap;
     margin: 5px;
-    width: 90%;
+    max-width: 50%;
   `}
 `;
 

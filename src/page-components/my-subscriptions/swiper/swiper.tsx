@@ -80,7 +80,7 @@ const TitleBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  margin: 2rem;
 `;
 const Text = styled.p`
   ${({ theme }) => css`

@@ -57,4 +57,7 @@ html {
   font-family: 'THICCCBOI';
   font-size: 18px;
 }
+body {
+  margin: 0;
+}
 `;

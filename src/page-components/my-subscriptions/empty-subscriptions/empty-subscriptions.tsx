@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import styled, { css, ThemeContext } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Empty } from '../../../assets/svg-react';
 import { UIButton } from '../../../components/ui/ui-button';

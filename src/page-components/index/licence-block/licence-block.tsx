@@ -18,7 +18,6 @@ function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
   const { username } = useSelector((state: RootState) => state.user);
   const router = useRouter();
   const { activeId } = router.query;
-  console.log(activeId);
   const changeSubscription = (subscribeId: number, productId: number) => {
     if (subscribeId) {
       dispatch(ChangeSubsribeAct({ subscribeId, productId }));

@@ -16,7 +16,6 @@ function* getSubscribesWorker() {
   try {
     const responce: AxiosResponse = yield call(getSubscribesRequest);
     yield put(renderSubscribes(responce.data));
-    console.log(responce.data);
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));
@@ -30,7 +29,6 @@ function* buySubscribeWorker(action: PayloadAction<BuySubscribeDto>) {
   yield put(setLoading(true));
   try {
     const responce: AxiosResponse = yield call(BuySubscribeRequest, { priceId });
-    console.log(responce.data);
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));
@@ -46,7 +44,6 @@ function* changeSubscribeWorker(action: PayloadAction<ChangeSubsribeDto>) {
       productId,
       subscribeId,
     });
-    console.log(responce.data);
   } catch (err) {
     if (err instanceof Error) {
       yield put(setError(err));
