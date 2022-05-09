@@ -4,35 +4,20 @@ import { useSwiper } from 'swiper/react';
 
 import { ArrowLeft, ArrowRight } from '../../assets/svg-react/index';
 
-function SlideButtons() {
+interface ButtonsProps {
+  slideId: number;
+}
+
+function SlideButtons({ slideId }: ButtonsProps) {
   const swiper = useSwiper();
-  const [disablePrev, setDisablePrev] = useState(true);
-  const [disableNext, setDisableNext] = useState(false);
-  const [index, setIndex] = useState(1);
-  const onPrev = () => {
-    if (index <= 1) {
-      setDisablePrev(true);
-    } else {
-      setDisablePrev(false);
-      setIndex((prevIndex) => --prevIndex);
-      swiper.slidePrev();
-    }
-  };
-  const onNext = () => {
-    if (index >= swiper.slides.length) {
-      setDisableNext(true);
-    } else {
-      setIndex((prevIndex) => ++prevIndex);
-      swiper.slideNext();
-    }
-  };
   return (
     <Heading>
-      <ArrowLeft onClick={() => onPrev()} />
-      <Index>
-        {index}/{swiper.slides.length}
-      </Index>
-      <ArrowRight onClick={() => onNext()} />
+      <StyledArrowLeft onClick={() => swiper.slidePrev()} />
+      <IndexBlock>
+        <Index>{slideId + 1}</Index>
+        <SlidesCount>/{swiper.slides.length}</SlidesCount>
+      </IndexBlock>
+      <StyledArrowRight onClick={() => swiper.slideNext()} />
     </Heading>
   );
 }
@@ -43,15 +28,52 @@ const Heading = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    margin-left: 2rem;
+    @media ${theme.devices.tablet} {
+      justify-content: center;
+    }
+  `}
+`;
+const IndexBlock = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex=wrap: nowrap;
+    align-items: center;
+    padding: 0 1rem 0 1rem;
+    @media ${theme.devices.tablet} {
+    }
   `}
 `;
 const Index = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.textPrimary};
     font-size: ${theme.sizes.small}rem;
-    font-weight: 700;
+    font-weight: bold;
     line-height: 28px;
-    padding: 0 5px 0 5px;
+  `}
+`;
+const SlidesCount = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.neutral};
+    font-size: ${theme.sizes.small}rem;
+    font-weight: bold;
+    line-height: 28px;
+  `}
+`;
+const StyledArrowLeft = styled(ArrowLeft)`
+  ${({ theme }) => css`
+    @media ${theme.devices.tablet} {
+      display: none;
+    }
+  `}
+`;
+const StyledArrowRight = styled(ArrowRight)`
+  ${({ theme }) => css`
+    @media ${theme.devices.tablet} {
+      display: none;
+    }
   `}
 `;
 

@@ -1,1 +1,1 @@
-export type UIComponentsVariant = 'primary' | 'secondary' | 'main';
+export type UIComponentsVariant = 'primary' | 'secondary' | 'main' | 'burger';

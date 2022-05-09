@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { UiAnchor } from '../../../components/ui/ui-anchor';
 import { UIButton } from '../../../components/ui/ui-button';
 import { hrefs } from '../../../routes/client';
 import { RootState } from '../../../store';
@@ -17,6 +18,7 @@ import { SubscriptionBlock } from '../subscription-block';
 
 function SwiperComponent(): JSX.Element {
   const [activeId, setActiveId] = useState(0);
+  const [slideId, setSlideId] = useState(1);
   const router = useRouter();
   const subscribes = useSelector((state: RootState) =>
     selectSubscribes(state.subscribes),
@@ -31,6 +33,12 @@ function SwiperComponent(): JSX.Element {
           value="Upgrade"
           onClick={() => router.push({ pathname: hrefs.home, query: { activeId } })}
         />
+        <StyledAnchor
+          anchorType="main"
+          onClick={() => router.push({ pathname: hrefs.home, query: { activeId } })}
+        >
+          Upgrade
+        </StyledAnchor>
       </TitleBlock>
       <SwiperBlock
         slidesPerView={1}
@@ -55,13 +63,14 @@ function SwiperComponent(): JSX.Element {
                     validDate={subscribe.currentPeriodEnd}
                     price={subscribe.product.prices[0].price}
                     setId={setActiveId}
+                    setSlideId={setSlideId}
                   />
                 )}
               </SwiperSlide>
             );
           })}
         </>
-        <SlideButtons />
+        <SlideButtons slideId={slideId} />
       </SwiperBlock>
     </>
   );
@@ -70,6 +79,7 @@ const TitleBlock = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin: 1rem;
 `;
 const Text = styled.p`
@@ -77,16 +87,31 @@ const Text = styled.p`
     color: ${theme.colors.textPrimary};
     font-size: ${theme.sizes.title}rem;
     font-weight: 700;
-    line-height: 40px;
+    line-height: 64px;
     margin: 0;
+    @media ${theme.devices.tablet} {
+      line-height: 40px;
+      font-size: ${theme.sizes.medium}rem;
+    }
   `}
 `;
 const StyledButton = styled(UIButton)`
-  padding: 0 0.2rem 0 0.2rem;
-  width: 10%;
+  padding: 26px 38px;
+  width: 152px;
   ${({ theme }) => css`
-    @media ${theme.devices.mobileL} {
-      width: 80%;
+    @media ${theme.devices.tablet} {
+      display: none;
+    }
+  `}
+`;
+const StyledAnchor = styled(UiAnchor)`
+  ${({ theme }) => css`
+    display: none;
+    @media ${theme.devices.tablet} {
+      display: block;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 18px;
     }
   `}
 `;

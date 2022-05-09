@@ -41,8 +41,9 @@ const Button = styled.button<{ $CSS?: CSSProp; $buttonType: string }>`
     background: ${theme.colors[$buttonType].initial};
     border: none;
     border-radius: 4px;
+    font-family: 'Inter';
     font-size: ${theme.sizes.extraSmall}rem;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1rem;
     color: ${theme.colors[$buttonType].text};
     margin: 0;

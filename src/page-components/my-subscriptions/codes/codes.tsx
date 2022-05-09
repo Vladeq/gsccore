@@ -85,20 +85,21 @@ const KeepButtonBlock = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 1rem;
+  align-items: center;
+  margin: 2rem;
 `;
 const Text = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.textPrimary};
-    font-size: ${theme.sizes.normal}rem;
+    font-size: ${theme.sizes.small}rem;
     font-weight: 700;
-    line-height: 40px;
+    line-height: 22px;
     margin: 0;
   `}
 `;
 const StyledButton = styled(UIButton)`
-  padding: 0 0.2rem 0 0.2rem;
-  width: 10%;
+  padding: 26px;
+  width: 148px;
   ${({ theme }) => css`
     @media ${theme.devices.mobileL} {
       width: 80%;

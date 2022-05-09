@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from 'react';
+import { useState } from 'react';
 import styled, { css, CSSProp } from 'styled-components';
 
 import { Checkbox } from '../../../assets/svg-react';
@@ -16,16 +17,20 @@ function UICheckbox({
   onChange,
   ...checkboxProps
 }: CheckboxProps): JSX.Element {
+  const [isFocus, setFocus] = useState(false);
+  console.log(isFocus);
   return (
     <Heading className={className} $CSS={rootCSS}>
       <HiddenCheckbox
         type="checkbox"
         checked={checked}
         onChange={onChange}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
         {...checkboxProps}
       />
-      <CheckboxBlock $checked={checked}>
-        <Icon $checked={checked} viewBox="0 0 18 18" />
+      <CheckboxBlock $checked={checked} $focus={isFocus}>
+        <Icon $checked={checked} viewBox="-5 0 24 18" />
       </CheckboxBlock>
     </Heading>
   );
@@ -50,22 +55,21 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   white-space: nowrap;
   width: 1px;
 `;
-const CheckboxBlock = styled.div<{ $checked?: boolean }>`
-  ${({ theme, $checked }) => css`
+const CheckboxBlock = styled.div<{ $checked?: boolean; $focus?: boolean }>`
+  ${({ theme, $checked, $focus }) => css`
     display: inline-block;
     width: 24px;
     height: 24px;
     background: ${$checked
       ? theme.colors.backgroundActiveElem
       : theme.colors.textPrimary};
-    border-radius: 8px;
+    border-radius: 7px;
     transition: all 150ms;
+    outline: ${$focus
+      ? `4px solid ${$checked ? theme.colors.hoverButton : theme.colors.textSecondary}`
+      : null};
     &:hover {
       background: ${$checked ? theme.colors.hoverButton : theme.colors.textSecondary};
-    }
-    &:focus {
-      border: 4px solid
-        ${$checked ? theme.colors.hoverButton : theme.colors.textSecondary};
     }
   `};
 `;

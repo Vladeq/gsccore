@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
+import { useSwiper } from 'swiper/react';
 
 import { UIButton } from '../../../components/ui/ui-button';
 import { Status } from '../status/index';
@@ -12,6 +13,7 @@ interface blockProps {
   validDate: number;
   price: string;
   setId: Dispatch<SetStateAction<number>>;
+  setSlideId: Dispatch<SetStateAction<number>>;
 }
 
 function SubscriptionBlock({
@@ -22,10 +24,13 @@ function SubscriptionBlock({
   validDate,
   price,
   setId,
+  setSlideId,
 }: blockProps): JSX.Element {
+  const swiper = useSwiper();
   if (isActive) {
     setId(id);
   }
+  setSlideId(swiper.realIndex);
   return (
     <Heading $isActive={isActive}>
       <TitleBlock>
