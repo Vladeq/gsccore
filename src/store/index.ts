@@ -32,7 +32,7 @@ function* rootSaga() {
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['isLoading', 'isError', 'isAuth', 'error'],
+  blacklist: ['isLoading', 'isError', 'error'],
 };
 const persistedReducer = persistReducer(persistConfig, userReducer.reducer);
 
