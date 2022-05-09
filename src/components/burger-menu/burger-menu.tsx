@@ -80,9 +80,8 @@ const Heading = styled.div<{ $isOpen: boolean }>`
     right: 0px;
     bottom: 0px;
     z-index: 293;
-    display: block;
+    display: none;
     width: 70%;
-    max-width: 100%;
     margin-top: 0px;
     padding-right: 0px;
     align-items: stretch;
@@ -91,6 +90,7 @@ const Heading = styled.div<{ $isOpen: boolean }>`
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     ${$isOpen &&
     css`
+      display: block;
       transform: translateX(0);
     `}
   `}
