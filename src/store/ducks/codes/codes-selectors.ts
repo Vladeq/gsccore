@@ -7,3 +7,10 @@ export const selectCodes = createSelector(
   (state: codesState) => state.codes,
   (codes: Record<number, Code>) => Object.values(codes),
 );
+export const selectCheckedCodes = createSelector(
+  (state: codesState) => state.codes,
+  (codes: Record<number, Code>) =>
+    Object.values(codes)
+      .filter((code) => code.isChecked == true)
+      .map((code) => code.id),
+);

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Footer } from '../../components/footer';
 import { Header } from '../../components/header';
-import { UserMenu } from '../../components/user-menu';
+import { Menu } from '../../components/menu';
 import { RootState } from '../../store/index';
 
 interface LayoutProps {
@@ -13,7 +13,7 @@ function MainLayout({ children }: LayoutProps): JSX.Element {
   const state = useSelector((state: RootState) => state.user);
   return (
     <Heading>
-      <Header headerRight={!!state.username && <UserMenu user={state.username} />} />
+      <Header headerRight={!!state.username && <Menu user={state.username} />} />
       {children}
       <Footer />
     </Heading>
@@ -21,9 +21,12 @@ function MainLayout({ children }: LayoutProps): JSX.Element {
 }
 
 const Heading = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: ${({ theme }) => theme.colors.backgroundMain};
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    background: ${theme.colors.backgroundMain};
+  `}
 `;
 
 export default MainLayout;

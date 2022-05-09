@@ -21,11 +21,13 @@ export const theme = {
     active: {
       primary: '#FC5842',
       secondary: '#969696',
+      burger: '#FFFFFF',
       main: '#393939',
     },
     inactive: {
       primary: '#393939',
       secondary: '#FFFFFF',
+      burger: '#969696',
       main: '#FC5842',
     },
     primary: {

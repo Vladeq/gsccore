@@ -43,8 +43,9 @@ const InfoBlock = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   background: ${({ theme }) => theme.colors.backgroundMain};
-  padding: 2rem;
-  width: 20rem;
+  margin: 1rem 0 1rem 0;
+  margin: 2rem;
+  max-width: 100%;
 `;
 const ColumnBlock = styled.div`
   display: flex;

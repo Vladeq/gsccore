@@ -13,6 +13,7 @@ export const codesReducer = createSlice({
       state.codes = action.payload.reduce(
         (accum: Record<number, Code>, current: Code) => {
           accum[current.id] = current;
+          accum[current.id].isChecked = false;
           return accum;
         },
         {},
@@ -22,6 +23,9 @@ export const codesReducer = createSlice({
       state.isError = false;
       state.error = null;
       state.codes[id] = { ...state.codes[id], status, origin };
+    },
+    setChecked(state, { payload: { id } }) {
+      state.codes[id].isChecked = !state.codes[id].isChecked;
     },
     setError(state, action) {
       state.isError = true;
@@ -33,4 +37,4 @@ export const codesReducer = createSlice({
   },
 });
 
-export const { renderCodes, setError, setLoading, activateCode } = codesReducer.actions;
+export const { renderCodes, setError, setLoading, activateCode, setChecked } = codesReducer.actions;

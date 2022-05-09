@@ -9,13 +9,14 @@ import { signOut } from '../../store/ducks/user/user-reducer';
 import { UiAnchor } from '../ui/ui-anchor';
 
 interface UserProps {
+  className?: string;
   user: string;
 }
-function UserMenu({ user }: UserProps): JSX.Element {
+function UserMenu({ user, className }: UserProps): JSX.Element {
   const { isOpened, toggle } = useToggle(false);
   const dispatch = useDispatch();
   return (
-    <Heading>
+    <Heading className={className}>
       <Item>
         <Link href={hrefs.subscriptions} passHref={true}>
           <A anchorType="secondary">My subscription</A>

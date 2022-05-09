@@ -25,7 +25,8 @@ const Heading = styled.div`
   justify-content: space-between;
   align-items: center;
   background: ${({ theme }) => theme.colors.backgroundMain};
-  padding: 40px;
+  padding: 2rem;
+  max-width: 100%;
 `;
 
 export default Header;

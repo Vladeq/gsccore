@@ -18,6 +18,7 @@ const Text = styled.p<{ $CSS?: CSSProp; $text: string }>`
     font-size: ${theme.sizes.small};
     font-weight: 700;
     line-height: 28px;
+    margin: 0.5rem;
     color: ${theme.colors.status[$text]};
     ${$CSS};
   `}
