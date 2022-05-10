@@ -13,7 +13,9 @@ function Header({ headerRight }: HeaderProps): JSX.Element {
   return (
     <Heading>
       <Link href={hrefs.home}>
-        <GscoreLogo />
+        <a>
+          <GscoreLogo />
+        </a>
       </Link>
       {headerRight}
     </Heading>
