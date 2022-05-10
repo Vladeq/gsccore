@@ -1,5 +1,4 @@
-import { InputHTMLAttributes } from 'react';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import styled, { css, CSSProp } from 'styled-components';
 
 import { Checkbox } from '../../../assets/svg-react';

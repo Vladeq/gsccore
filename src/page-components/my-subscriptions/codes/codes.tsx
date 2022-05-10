@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
@@ -25,6 +25,16 @@ function Codes(): JSX.Element {
   const activate = (codeString: string) => {
     dispatch(activateCodeAct({ code: codeString }));
   };
+  const manageCodesHandler = useCallback(
+    () =>
+      dispatch(
+        manageCodesAct({
+          codesIds: checkedCodes,
+          subscribeId: codes[0].subscribeId,
+        }),
+      ),
+    [],
+  );
   const state = useSelector((state: RootState) => state.codes);
   const codes = useSelector((state: RootState) => selectCodes(state.codes));
   const checkedCodes = useSelector((state: RootState) => selectCheckedCodes(state.codes));
@@ -60,14 +70,7 @@ function Codes(): JSX.Element {
             buttonType="primary"
             isLoading={state.isLoading}
             value="Confirm"
-            onClick={() =>
-              dispatch(
-                manageCodesAct({
-                  codesIds: checkedCodes,
-                  subscribeId: codes[0].subscribeId,
-                }),
-              )
-            }
+            onClick={manageCodesHandler}
           />
         </KeepButtonBlock>
       ) : null}

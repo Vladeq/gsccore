@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 
-interface toggleReturn {
+interface useToggleReturn {
   isOpened: boolean;
-  open: () => void;
-  close: () => void;
-  toggle: Dispatch<SetStateAction<boolean>>;
+  toggle: () => void;
 }
-export default function useToggle(initial: boolean): toggleReturn {
-  const [isOpened, toggle] = useState(initial);
-  return { isOpened, open: () => toggle(true), close: () => toggle(false), toggle };
+export default function useToggle(initial: boolean): useToggleReturn {
+  const [isOpened, setIsOpened] = useState(initial);
+  const toggle = useCallback(() => {
+    setIsOpened((prevState) => !prevState);
+  }, []);
+  return { isOpened, toggle };
 }

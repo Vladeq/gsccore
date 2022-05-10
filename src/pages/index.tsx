@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { Refresh } from '../assets/svg-react';
 import { ErrorComponent } from '../components/error-component/index';
-import { HeadingH2 } from '../components/heading-h2';
+import { HeadingTitle } from '../components/heading-title';
 import { MainLayout } from '../layouts/main-layout';
 import { LicenceBlock } from '../page-components/index/licence-block';
 import { RootState } from '../store';
@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
     <MainLayout>
       <Heading>
         <TitleBlock>
-          <HeadingH2 text="Get started with Gscore today!" />
+          <HeadingTitle text="Get started with Gscore today!" />
         </TitleBlock>
         <Blocks>
           {state.isLoading ? (

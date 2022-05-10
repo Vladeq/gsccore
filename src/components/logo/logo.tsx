@@ -1,6 +1,6 @@
 import styled, { css, CSSProp } from 'styled-components';
 
-import GscoreLogo from './logo.svg';
+import { GscoreLogo } from '../../assets/svg-react';
 
 interface LogoProps {
   className?: string;

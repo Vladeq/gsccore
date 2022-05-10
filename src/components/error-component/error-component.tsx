@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
-interface ErrorProps {
-  err: any;
+interface ErrorComponentProps {
+  err: string;
 }
 
-function ErrorComponent({ err }: ErrorProps): JSX.Element {
+function ErrorComponent({ err }: ErrorComponentProps): JSX.Element {
   return (
     <div>
       <Text>{err}</Text>

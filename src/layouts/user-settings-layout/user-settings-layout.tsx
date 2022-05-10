@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { ActiveLink } from '../../components/active-link';
-import { HeadingH2 } from '../../components/heading-h2';
+import { HeadingTitle } from '../../components/heading-title';
 import { hrefs } from '../../routes/client';
 
 interface UserSettingsProps {
@@ -12,7 +12,7 @@ function UserSettingsLayout({ children }: UserSettingsProps): JSX.Element {
   return (
     <Heading>
       <TitleBlock>
-        <HeadingH2 text="Settings" />
+        <HeadingTitle text="Settings" />
       </TitleBlock>
       <LinksBlock>
         <ActiveLink

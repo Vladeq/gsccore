@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
-import { HeadingH2 } from '../components/heading-h2';
+import { HeadingTitle } from '../components/heading-title';
 import { UiAnchor } from '../components/ui/ui-anchor';
 import { IsAuthorized } from '../hocs/is-authorized/index';
 import { MainLayout } from '../layouts/main-layout';
@@ -22,7 +22,7 @@ function SignUp(): JSX.Element {
           <Pointer isActive={false} href={hrefs.checkout} text="Checkout" />
         </Pointers>
         <TitleBlock>
-          <HeadingH2 text="Create account" />
+          <HeadingTitle text="Create account" />
           <Text>
             You need to enter your name and email. We will send you a temporary password
             by email

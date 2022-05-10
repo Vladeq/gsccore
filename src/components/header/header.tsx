@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { Logo } from '../../assets/svg-react/index';
+import { GscoreLogo } from '../../assets/svg-react/index';
 import { hrefs } from '../../routes/client';
 
 interface HeaderProps {
@@ -13,7 +13,7 @@ function Header({ headerRight }: HeaderProps): JSX.Element {
   const router = useRouter();
   return (
     <Heading>
-      <Logo onClick={() => router.push(hrefs.home)} />
+      <GscoreLogo onClick={() => router.push(hrefs.home)} />
       {headerRight}
     </Heading>
   );

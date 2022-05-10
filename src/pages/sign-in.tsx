@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { HeadingH2 } from '../components/heading-h2';
+import { HeadingTitle } from '../components/heading-title';
 import { IsAuthorized } from '../hocs/is-authorized/index';
 import { MainLayout } from '../layouts/main-layout';
 import { SignInForm } from '../page-components/sign/sign-in-form';
@@ -17,7 +17,7 @@ function SignIn(): JSX.Element {
           <Pointer isActive={false} href={hrefs.checkout} text="Checkout" />
         </Pointers>
         <TitleBlock>
-          <HeadingH2 text="Log in" />
+          <HeadingTitle text="Log in" />
         </TitleBlock>
         <SignInForm />
       </Heading>

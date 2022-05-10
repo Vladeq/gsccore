@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 interface HeadingProps {
   text: string;
 }
-function HeadingH2({ text }: HeadingProps): JSX.Element {
+function HeadingTitle({ text }: HeadingProps): JSX.Element {
   return <Title>{text}</Title>;
 }
 
@@ -17,4 +17,4 @@ const Title = styled.h2`
   `}
 `;
 
-export default HeadingH2;
+export default HeadingTitle;

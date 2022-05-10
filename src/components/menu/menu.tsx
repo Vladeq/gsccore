@@ -14,11 +14,7 @@ function Menu({ user }: MenuProps): JSX.Element {
   return (
     <>
       <StyledUserMenu user={user} />
-      <StyledMenuLine
-        onClick={() => {
-          toggle((prevState) => !prevState);
-        }}
-      />
+      <StyledMenuLine onClick={toggle} />
       <BurgerMenu isOpen={isOpened} user={user} setToggle={toggle} />
     </>
   );

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
-import { HeadingH2 } from '../components/heading-h2';
+import { HeadingTitle } from '../components/heading-title';
 import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { hrefs } from '../routes/client';
@@ -13,7 +13,7 @@ export default function SuccessfulPurchase(): JSX.Element {
     <MainLayout>
       <Heading>
         <TitleBlock>
-          <HeadingH2 text="Start your subscription" />
+          <HeadingTitle text="Start your subscription" />
           <Text>
             We have sent you a payment receipt by e-mail and a link to download the plugin
             with a license key.

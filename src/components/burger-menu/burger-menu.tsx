@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Dispatch, SetStateAction } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 
@@ -10,7 +10,7 @@ import {
   VectorUp,
   WhiteClose,
 } from '../../assets/svg-react/index';
-import { Logo } from '../../assets/svg-react/index';
+import { GscoreLogo } from '../../assets/svg-react/index';
 import useToggle from '../../hooks/use-toggle';
 import { hrefs } from '../../routes/client';
 import { signOut } from '../../store/ducks/user/user-reducer';
@@ -19,17 +19,20 @@ import { UiAnchor } from '../ui/ui-anchor';
 interface BurgerProps {
   isOpen: boolean;
   user: string;
-  setToggle: Dispatch<SetStateAction<boolean>>;
+  setToggle: () => void;
 }
 
 function BurgerMenu({ isOpen, user, setToggle }: BurgerProps): JSX.Element {
   const { isOpened, toggle } = useToggle(false);
   const dispatch = useDispatch();
+  const signOutHandler = useCallback(() => {
+    dispatch(signOut());
+  }, []);
   return (
     <Heading $isOpen={isOpen}>
       <UpSide>
-        <WhiteClose onClick={() => setToggle((prevState) => !prevState)} />
-        <Logo />
+        <WhiteClose onClick={setToggle} />
+        <GscoreLogo />
       </UpSide>
       <Menu>
         <Item>
@@ -39,12 +42,7 @@ function BurgerMenu({ isOpen, user, setToggle }: BurgerProps): JSX.Element {
         </Item>
         <Drop>
           <UserItem>
-            <A
-              anchorType="secondary"
-              onClick={() => {
-                toggle((prevState) => !prevState);
-              }}
-            >
+            <A anchorType="secondary" onClick={toggle}>
               {user}
             </A>
             {isOpened ? <VectorUp /> : <VectorDown />}
@@ -60,7 +58,7 @@ function BurgerMenu({ isOpen, user, setToggle }: BurgerProps): JSX.Element {
               <DropItem>
                 <GreyFrame />
                 <Link href={hrefs.signin}>
-                  <A anchorType="burger" onClick={() => dispatch(signOut())}>
+                  <A anchorType="burger" onClick={signOutHandler}>
                     Log out
                   </A>
                 </Link>

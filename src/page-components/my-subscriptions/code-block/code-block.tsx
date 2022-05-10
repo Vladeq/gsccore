@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
@@ -26,9 +27,11 @@ function CodeBlock({
   pressActivate,
 }: CodeProps): JSX.Element {
   const dispatch = useDispatch();
+  const setCheckedHandler = useCallback(() => dispatch(setChecked({ id })), []);
+  const pressActivateHandler = useCallback(() => pressActivate(code), []);
   return (
     <Heading>
-      <CheckBlock onClick={() => dispatch(setChecked({ id }))}>
+      <CheckBlock onClick={setCheckedHandler}>
         <UICheckbox checked={isChecked} />
       </CheckBlock>
       <LicenceBlock>
@@ -53,7 +56,7 @@ function CodeBlock({
               buttonType="secondary"
               value="Activate"
               isLoading={false}
-              onClick={() => pressActivate(code)}
+              onClick={pressActivateHandler}
             />
           ) : null}
         </Domain>

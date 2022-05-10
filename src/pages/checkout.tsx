@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
@@ -7,7 +6,7 @@ import styled, { css } from 'styled-components';
 import { getProductsRequest } from '../api/requests';
 import { Basket } from '../assets/svg-react';
 import { ErrorComponent } from '../components/error-component';
-import { HeadingH2 } from '../components/heading-h2';
+import { HeadingTitle } from '../components/heading-title';
 import { UIButton } from '../components/ui/ui-button';
 import { MainLayout } from '../layouts/main-layout';
 import { StagePointer } from '../page-components/sign/stage-pointer';
@@ -41,7 +40,7 @@ export default function Checkout({ product }: CheckoutProps): JSX.Element {
           <Pointer isActive={true} href={hrefs.checkout} text="Checkout" />
         </Pointers>
         <TitleBlock>
-          <HeadingH2 text="Checkout" />
+          <HeadingTitle text="Checkout" />
         </TitleBlock>
         <CheckoutBlock>
           <CheckoutTitle>

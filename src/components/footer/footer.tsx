@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 
-import { Facebook, Linkedin, Logo, Twitter } from '../../assets/svg-react/index';
+import { Facebook, GscoreLogo, Linkedin, Twitter } from '../../assets/svg-react/index';
 
 function Footer(): JSX.Element {
   return (
     <Heading>
       <InfoBlock>
         <ColumnBlock>
-          <Logo />
+          <GscoreLogo />
           <InfoText>
             Ut enim ad minim veniam quis nostrud exercitation ea commodo
           </InfoText>

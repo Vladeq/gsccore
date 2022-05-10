@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -15,6 +16,9 @@ interface UserProps {
 function UserMenu({ user, className }: UserProps): JSX.Element {
   const { isOpened, toggle } = useToggle(false);
   const dispatch = useDispatch();
+  const signOutHandler = useCallback(() => {
+    dispatch(signOut());
+  }, []);
   return (
     <Heading className={className}>
       <Item>
@@ -23,12 +27,7 @@ function UserMenu({ user, className }: UserProps): JSX.Element {
         </Link>
       </Item>
       <Item>
-        <A
-          anchorType="secondary"
-          onClick={() => {
-            toggle((prevState) => !prevState);
-          }}
-        >
+        <A anchorType="secondary" onClick={toggle}>
           {user}
         </A>
         {isOpened ? <VectorUp /> : <VectorDown />}
@@ -44,7 +43,7 @@ function UserMenu({ user, className }: UserProps): JSX.Element {
           <DropItem>
             <Frame />
             <Link href={hrefs.signin}>
-              <A anchorType="secondary" onClick={() => dispatch(signOut())}>
+              <A anchorType="secondary" onClick={signOutHandler}>
                 Log out
               </A>
             </Link>
