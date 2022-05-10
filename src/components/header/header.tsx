@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -10,10 +10,11 @@ interface HeaderProps {
 }
 
 function Header({ headerRight }: HeaderProps): JSX.Element {
-  const router = useRouter();
   return (
     <Heading>
-      <GscoreLogo onClick={() => router.push(hrefs.home)} />
+      <Link href={hrefs.home}>
+        <GscoreLogo />
+      </Link>
       {headerRight}
     </Heading>
   );

@@ -22,7 +22,6 @@ interface CheckoutProps {
 export default function Checkout({ product }: CheckoutProps): JSX.Element {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.subscribes);
-  console.log(state.error);
   const router = useRouter();
   const purchase = (id: number) => {
     dispatch(buySubscribeAct({ priceId: id }));

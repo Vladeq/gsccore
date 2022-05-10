@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
@@ -18,14 +18,27 @@ function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
   const { username } = useSelector((state: RootState) => state.user);
   const router = useRouter();
   const { activeId } = router.query;
-  const changeSubscription = (subscribeId: number, productId: number) => {
-    if (subscribeId) {
-      dispatch(ChangeSubsribeAct({ subscribeId, productId }));
-      router.push(hrefs.subscriptions);
-    } else {
-      return null;
-    }
-  };
+  const routerHandler = useCallback(
+    async (productId: number, activeId?: string) => {
+      if (activeId) {
+        const subscribeId = Number(activeId);
+        dispatch(ChangeSubsribeAct({ subscribeId, productId }));
+        await router.push(hrefs.subscriptions);
+      } else {
+        if (username) {
+          await router.push({ pathname: hrefs.checkout, query: { productId } });
+        } else {
+          await router.push({ pathname: hrefs.signup, query: { productId } });
+        }
+      }
+    },
+    [dispatch, router, username],
+  );
+
+  const getGscoreHandler = useCallback(
+    () => routerHandler(id, activeId as string | undefined),
+    [activeId, id, routerHandler],
+  );
   return (
     <Heading>
       <BlockInfo>
@@ -51,20 +64,7 @@ function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
         </Li>
       </LiBlock>
       <LinkBlock>
-        <Link
-          href={
-            activeId
-              ? { pathname: hrefs.subscriptions }
-              : username
-              ? { pathname: hrefs.checkout, query: { id } }
-              : { pathname: hrefs.signup, query: { id } }
-          }
-          passHref={true}
-        >
-          <LinkText onClick={() => changeSubscription(Number(activeId), id)}>
-            Get Gscore
-          </LinkText>
-        </Link>
+        <LinkText onClick={getGscoreHandler}>Get Gscore</LinkText>
       </LinkBlock>
     </Heading>
   );

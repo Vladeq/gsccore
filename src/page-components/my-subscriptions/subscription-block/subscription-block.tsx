@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useSwiper } from 'swiper/react';
 
@@ -27,10 +27,13 @@ function SubscriptionBlock({
   setSlideId,
 }: blockProps): JSX.Element {
   const swiper = useSwiper();
-  if (isActive) {
-    setId(id);
-  }
-  setSlideId(swiper.realIndex);
+  useEffect(() => {
+    if (isActive) {
+      setId(id);
+    }
+    setSlideId(swiper.realIndex);
+  }, [id, isActive, setId, setSlideId, swiper]);
+
   return (
     <Heading $isActive={isActive}>
       <TitleBlock>
