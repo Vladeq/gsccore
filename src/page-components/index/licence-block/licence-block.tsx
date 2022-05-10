@@ -23,16 +23,16 @@ function LicenceBlock({ id, price, sites }: LicenceBlockProps): JSX.Element {
       if (activeId) {
         const subscribeId = Number(activeId);
         dispatch(ChangeSubsribeAct({ subscribeId, productId }));
-        await router.push(hrefs.subscriptions);
+        router.push(hrefs.subscriptions);
       } else {
         if (username) {
-          await router.push({ pathname: hrefs.checkout, query: { productId } });
+          router.push({ pathname: hrefs.checkout, query: { id } });
         } else {
-          await router.push({ pathname: hrefs.signup, query: { productId } });
+          router.push({ pathname: hrefs.signup, query: { id } });
         }
       }
     },
-    [dispatch, router, username],
+    [dispatch, router, username, id],
   );
 
   const getGscoreHandler = useCallback(
